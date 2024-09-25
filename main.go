@@ -30,6 +30,14 @@ func main() {
 	//creamos el router
 	router := gin.Default()
 
+	//rutas de front
+	//------------------------------------------------------------------------------
+	router.Static("/templates", "./templates")                //sirvo http://localhost:8080/templates/login.html     <-- modificar este
+	router.StaticFile("templates2", "./templates/login.html") //sirvo http://localhost:8080/templates2     <-- este pasa sinn el css
+
+	//------------------------------------------------------------------------------
+	//rutas de back
+
 	//configuracion de rutas
 	//POST
 	router.POST("/categoria", handlers.CreateCategoria(db))
@@ -37,6 +45,15 @@ func main() {
 	router.POST("/medica", handlers.CreateMedicamento(db))
 	router.POST("/usuario", handlers.CreateUsuario(db))
 
+	//gets          agregar el preload a las tablas cuando se agreguen las fk
+	router.GET("/categoria/:id_categoria", handlers.GetCategoria(db))
+	router.GET("/categorias", handlers.GetallCategoria(db))
+	router.GET("/lote/:Id", handlers.GetLote(db))
+	router.GET("/lotes", handlers.GetallLotes(db))
+	router.GET("/medicamento/:Id", handlers.GetMedicamento(db))
+	router.GET("/medicamentos", handlers.GetallMedicamentos(db))
+	router.GET("/usuario/:Id", handlers.GetUsuario(db))
+	router.GET("/usuarios", handlers.GetallUsuarios(db))
 	router.Run(":8080")
 
 }

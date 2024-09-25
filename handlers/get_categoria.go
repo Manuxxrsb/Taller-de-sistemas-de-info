@@ -10,12 +10,24 @@ import (
 
 func GetCategoria(db *gorm.DB) gin.HandlerFunc {
 	return func(informacion *gin.Context) {
-		id := informacion.Param("id")
+		id := informacion.Param("id_categoria")
 		var categoria models.Categoria
-		if err := db.Preload("usuario").First(&categoria, id).Error; err != nil {
+		if err := db.First(&categoria, id).Error; err != nil {
 			informacion.JSON(http.StatusNotFound, gin.H{"error": "Categoria no encontrada"})
 			return
 		}
 		informacion.JSON(http.StatusOK, categoria)
+	}
+}
+
+func GetallCategoria(db *gorm.DB) gin.HandlerFunc {
+	return func(informacion *gin.Context) {
+		var categorias []models.Categoria
+		err := db.Find(&categorias).Error
+		if err != nil {
+			informacion.JSON(http.StatusInternalServerError, gin.H{"error": "Error al buscar todas las categorías"})
+			return
+		}
+		informacion.JSON(http.StatusOK, categorias)
 	}
 }
