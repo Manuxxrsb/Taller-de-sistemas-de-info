@@ -66,6 +66,8 @@ func main() {
 	router.GET("/medicamentos", handlers.GetallMedicamentos(db))
 	router.GET("/usuario/:Id", handlers.GetUsuario(db))
 	router.GET("/usuarios", handlers.GetallUsuarios(db))
+
+	//exponemos el puerto
 	router.Run(":8080")
 
 }

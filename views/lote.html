@@ -1,5 +1,7 @@
 <html lang="en">
 
+</html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +10,7 @@
 </head>
 
 <body>
-    <h1>Medicamentos</h1>
+    <h1>lotes</h1>
     <button onclick="prueba()">Obtener informacion</button>
 
     <div></div>
@@ -16,7 +18,7 @@
     <script>
         function prueba() {
 
-            const url = 'http://localhost:8080/medicamentos'
+            const url = 'http://localhost:8080/lotes'
             fetch(url)
                 .then(response => response.json()) // accessing the API data as JSON
                 .then(data => {
@@ -26,9 +28,10 @@
                     for (let i = 0; i < lista.length; i++) {
 
                         texto = texto + (`<ul><li>${lista[i].Id}</li>
-                                <li>${lista[i].nombre}</li>
-                                <li>${lista[i].Marca}</li>
-                                <li>${lista[i].descripcion}</li></ul>
+                                <li>${lista[i].numerolote}</li>
+                                <li>${lista[i].fechafabric}</li>
+                                <li>${lista[i].fechavence}</li>
+                                <li>${lista[i].stock}</li></ul>
                                 `)
 
                     }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Enviar formulario como JSON</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">  
+
+        <button type="submit">Enviar</button>
+    </form>  
+
+
+    <script>
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Convertir el objeto a JSON
+            const jsonData = JSON.stringify(data);
+
+            // Enviar la solicitud al backend (ejemplo con Fetch)
+            fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Respuesta del servidor:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+</body>
+
+</html>
