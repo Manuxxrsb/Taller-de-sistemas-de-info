@@ -10,10 +10,10 @@
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email">  
+        <input type="email" id="email" name="email">
 
         <button type="submit">Enviar</button>
-    </form>  
+    </form>
 
 
     <script>
@@ -29,7 +29,7 @@
             const jsonData = JSON.stringify(data);
 
             // Enviar la solicitud al backend (ejemplo con Fetch)
-            fetch('/api/submit', {
+            fetch('/usuario', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

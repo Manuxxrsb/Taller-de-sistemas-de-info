@@ -21,5 +21,5 @@ func DBURL() string {
 	DBPort := os.Getenv("DBPort")
 	DBName := os.Getenv("DBName")
 
-	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s", DBUser, DBPassword, DBHost, DBPort, DBName)
+	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=require", DBUser, DBPassword, DBHost, DBPort, DBName)
 }
