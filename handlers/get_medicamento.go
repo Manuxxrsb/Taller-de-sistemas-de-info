@@ -22,7 +22,7 @@ func GetMedicamento(db *gorm.DB) gin.HandlerFunc {
 
 func GetallMedicamentos(db *gorm.DB) gin.HandlerFunc {
 	return func(informacion *gin.Context) {
-		var medicamentos []models.Categoria
+		var medicamentos []models.Medicamento
 		err := db.Find(&medicamentos).Error
 		if err != nil {
 			informacion.JSON(http.StatusInternalServerError, gin.H{"error": "Error al buiscar todos los medicamentos"})

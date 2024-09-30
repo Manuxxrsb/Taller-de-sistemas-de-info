@@ -7,6 +7,34 @@ body {
     /* Gradiente suave para un fondo nublado */
 }
 
+.home {
+    background-color: rgb(151, 17, 204);
+}
+
+.title-home {
+    color: rgb(123, 156, 247);
+}
+
+.func {
+    background-color: purple;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(78, 4, 78);
+
+    display: flex;
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+}
+
+.func-li {
+    background-color: rgba(164, 233, 233, 0.671);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(78, 4, 78);
+}
+
 ul {
     list-style: none;
     padding: 0;
