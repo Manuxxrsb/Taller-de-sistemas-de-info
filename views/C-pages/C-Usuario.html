@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ingresar Usuario</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+</head>
+
+<body>
+    <h1 class="title-home">Ingresa un Usuario</h1>
+    <form id="myForm">
+        <label for="Nombre" class="title-home">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
+        <label for="Apellido" class="title-home">Apellido:</label> <input type="text" id="Apellido" name="Apellido">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Convertir el objeto a JSON
+            const jsonData = JSON.stringify(data);
+            const url = 'http://localhost:8080/usuario'
+            // Enviar la solicitud al backend (ejemplo con Fetch)
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Respuesta del servidor:', data);
+                    notification.textContent = data;
+                    notification.style.display = 'block';
+                    notification.classList.toggle('error', isError);
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

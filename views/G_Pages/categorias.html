@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/estilos.css">
+    <title>Get-Usuarios</title>
+</head>
+
+<body>
+
+    <h1 class="title-home">Categorias</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID CATEGORIA</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCION</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+        <tbody class="Item-Categoria"></tbody>
+    </table>
+
+
+
+
+
+    <button onclick="prueba()">Obtener informacion</button>
+
+
+
+    <script>
+        function prueba() {
+            //alert("soy una alerta")
+            const url = 'http://localhost:8080/categorias' // countries api
+            fetch(url)
+                .then(response => response.json()) // accessing the API data as JSON
+                .then(data => {
+
+                    const lista = Object.values(data)
+                    const p = document.querySelector('tbody.Item-Categoria')
+                    var texto = []
+                    for (let i = 0; i < lista.length; i++) {
+
+                        texto = texto + (`<tr>
+                                <td>${lista[i].Id_categoria}</td>
+                                <td>${lista[i].nombre}</td>
+                                <td>${lista[i].descripcion}</td>
+                                <td class="Operaciones">
+                                    <div><button class="Eliminar"></button></div>
+                                    <div><button class="Modificar"></button></div>
+                                </tr>
+                                `)
+
+                    }
+
+                    p.innerHTML = texto
+
+                })
+                .catch(error => console.error(error))
+        }
+    </script>
+</body>
+
+</html>

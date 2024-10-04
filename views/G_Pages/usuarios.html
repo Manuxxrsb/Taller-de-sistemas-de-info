@@ -8,38 +8,46 @@
 </head>
 
 <body>
-    <h1>Categorias</h1>
-    <ul>
-        <li>ID CATEGORIA</li>
-        <li>NOMBRE</li>
-        <li>DESCRIPCION</li>
-    </ul>
-    <div></div>
-    <button onclick="prueba()">Obtener informacion</button>
+    <h1 class="title-home">Usuarios</h1>
 
+    <div class="table-container">
+        <table>
+            <thead> <!--Cabecera de la tabla-->
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </thead>
+
+            <tbody class="Item-Usuarios"></tbody>
+
+        </table>
+    </div>
+    <button onclick="prueba()">Obtener informacion</button>
 
 
     <script>
         function prueba() {
             //alert("soy una alerta")
-            const url = 'http://localhost:8080/categorias' // countries api
+            const url = 'http://localhost:8080/usuarios'
             fetch(url)
                 .then(response => response.json()) // accessing the API data as JSON
                 .then(data => {
 
                     const lista = Object.values(data)
-                    const p = document.querySelector('div')
+                    const p = document.querySelector('tbody.Item-Usuarios')
                     var texto = []
                     for (let i = 0; i < lista.length; i++) {
 
-                        texto = texto + (`<ul><li>${lista[i].Id_categoria}</li>
-                                <li>${lista[i].nombre}</li>
-                                <li>${lista[i].descripcion}</li></ul>
+                        texto = texto + (`<tr><td>${lista[i].Id}</td>
+                                <td>${lista[i].nombre}</td>
+                                <td>${lista[i].apellido}</td></tr>
                                 `)
-
                     }
 
                     p.innerHTML = texto
+
 
                 })
                 .catch(error => console.error(error))

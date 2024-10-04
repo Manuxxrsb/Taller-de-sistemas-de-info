@@ -1,9 +1,9 @@
 package models
 
 type Categoria struct {
-	Id_categoria uint   `json:"Id_categoria" gorm:"primaryKey"`
+	Id_categoria int    `gorm:"primaryKey ;autoIncrement"`
 	Nombre       string `json:"nombre"`
-	Descipcion   string `json:"descripcion"`
+	Descripcion  string `json:"descripcion"`
 }
 
 func (Categoria) TableName() string {

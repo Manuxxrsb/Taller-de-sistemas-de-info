@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Enviar formulario como JSON</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresa Medicamento</title>
+    <link rel="stylesheet" href="styles/estilos.css">
 </head>
 
 <body>
+    <h1 class="title-home">Ingresa un Medicamento</h1>
     <form id="myForm">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-
+        <label for="Nombre">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
+        <label for="Marca">Marca:</label> <input type="text" id="Marca" name="Marca">
+        <label for="Descripcion">Descripcion:</label> <input type="text" id="Descripcion" name="Descripcion">
+        <label for="numerolote">Numerolote:</label> <input type="text" id="numerolote" name="numerolote">
+        <label for="fechafabric">Fechafabric:</label> <input type="text" id="fechafabric" name="fechafabric">
+        <label for="fechavence">Fechavence:</label> <input type="text" id="fechavence" name="fechavence">
+        <label for="stock">Stock:</label> <input type="number" id="stock" name="stock">
         <button type="submit">Enviar</button>
     </form>
 
@@ -29,7 +34,7 @@
             const jsonData = JSON.stringify(data);
 
             // Enviar la solicitud al backend (ejemplo con Fetch)
-            fetch('/usuario', {
+            fetch('http://localhost:8080/medica', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,6 +50,7 @@
                 });
         });
     </script>
+
 
 </body>
 

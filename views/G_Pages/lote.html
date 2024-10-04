@@ -10,13 +10,23 @@
 </head>
 
 <body>
-    <h1>lotes</h1>
-    <ul>
-        <li>ID LOTE</li>
-        <li># LOTE</li>
-        <li>FECHA FABRICACION</li>
-        <li>FECHA VENCIMIENTO</li>
-        <li>STOCK</li>
+    <h1 class="title-home">lotes</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID LOTE</th>
+                    <th># LOTE</th>
+                    <th>FECHA FABRICACION</th>
+                    <th>FECHA VENCIMIENTO</th>
+                    <th>STOCK</th>
+                </tr>
+            </thead>
+            <tbody class="Item-Lote"></tbody>
+        </table>
+    </div>
+
+
     </ul>
     <div></div>
     <button onclick="prueba()">Obtener informacion</button>
@@ -31,15 +41,15 @@
                 .then(response => response.json()) // accessing the API data as JSON
                 .then(data => {
                     const lista = Object.values(data)
-                    const p = document.querySelector('div')
+                    const p = document.querySelector('tbody.Item-Lote')
                     var texto = []
                     for (let i = 0; i < lista.length; i++) {
 
-                        texto = texto + (`<ul><li>${lista[i].Id}</li>
-                                <li>${lista[i].numerolote}</li>
-                                <li>${lista[i].fechafabric}</li>
-                                <li>${lista[i].fechavence}</li>
-                                <li>${lista[i].stock}</li></ul>
+                        texto = texto + (`<tr><td>${lista[i].Id}</td>
+                                <td>${lista[i].numerolote}</td>
+                                <td>${lista[i].fechafabric}</td>
+                                <td>${lista[i].fechavence}</td>
+                                <td>${lista[i].stock}</td></tr>
                                 `)
 
                     }

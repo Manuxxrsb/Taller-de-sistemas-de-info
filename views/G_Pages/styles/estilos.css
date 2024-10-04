@@ -37,7 +37,6 @@ body {
     background-color: rgb(199, 121, 175);
     width: auto;
     height: auto;
-
 }
 
 .title-home {
@@ -166,4 +165,34 @@ li {
 
 header {
     border-radius: 10px;
+}
+
+.Eliminar {
+    border: solid red;
+    background-color: red;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.Eliminar:hover {
+    background-color: #a71593;
+}
+
+.Modificar {
+    border: solid yellow;
+    background-color: yellow;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.Modificar:hover {
+    background-color: #a71593;
+}
+
+.Operaciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
