@@ -1,0 +1,9 @@
+.title-home {
+    color: rgba(230, 216, 156, 0.918);
+    text-shadow:
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black,
+        1px 1px 0px black;
+
+}
