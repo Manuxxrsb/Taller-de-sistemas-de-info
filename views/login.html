@@ -83,12 +83,16 @@
             const password = document.getElementById('password').value;
 
             // Verificar si los datos son correctos (simulado para este ejemplo)
-            if (email === 'admin' && password === 'admin') {
+            if (email === 'admin@utem.cl' && password === 'admin') {
                 // Redirigir a otra página en el mismo directorio (por ejemplo, dashboard.html)
                 window.location.href = 'index.html';
+
+            } else if (email === 'user@utem.cl' && password === 'admin') {
+                window.location.href = './ClientesPages/VistaPrincipal.html';
             } else {
                 alert('Correo o contraseña incorrectos');
             }
+
         });
     </script>
 
