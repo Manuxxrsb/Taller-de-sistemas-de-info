@@ -12,7 +12,7 @@ func CreateCategoria(db *gorm.DB) gin.HandlerFunc {
 	return func(informacion *gin.Context) {
 		var categoria models.Categoria
 		if err := informacion.ShouldBindJSON(&categoria); err != nil { //verificamos info
-			informacion.JSON(http.StatusBadRequest, gin.H{"aqui": err.Error()})
+			informacion.JSON(http.StatusBadRequest, gin.H{"Error": err.Error()})
 			return
 		}
 

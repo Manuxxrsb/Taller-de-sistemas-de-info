@@ -55,14 +55,16 @@
 
     <div class="login-container">
         <h2 class="text-center">Iniciar Sesión</h2>
-        <form id="loginForm">
+        <form id="myForm">
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" placeholder="Ingrese su correo" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Ingrese su contraseña" required>
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Ingresar</button>
@@ -74,25 +76,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Manejador para el evento de envío del formulario
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+        // Capturamos el evento de submit del formulario
+        const form = document.getElementById('myForm');
 
-            // Obtener los valores de los campos del formulario
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
-            // Verificar si los datos son correctos (simulado para este ejemplo)
-            if (email === 'admin@utem.cl' && password === 'admin') {
-                // Redirigir a otra página en el mismo directorio (por ejemplo, dashboard.html)
-                window.location.href = 'index.html';
+            // Crear un objeto con los datos del formulario
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const jsonData = JSON.stringify(data);
 
-            } else if (email === 'user@utem.cl' && password === 'admin') {
-                window.location.href = './ClientesPages/VistaPrincipal.html';
-            } else {
-                alert('Correo o contraseña incorrectos');
-            }
+            const url = 'http://localhost:8080/login';
 
+            // Realizamos la solicitud al servidor
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Asegurar el uso correcto de JSON
+                },
+                body: jsonData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Aquí puedes manejar la respuesta que recibes del backend
+                    const lista = Object.values(data)
+                    console.log('Respuesta del servidor:', data);
+                    alert('Login exitoso: ' + JSON.stringify(data)); // Muestra el resultado
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error en el login');
+                });
         });
     </script>
 

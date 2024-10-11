@@ -31,4 +31,7 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.GET("/usuario/:Id", handlers.GetUsuario(db))
 	router.GET("/usuarios", handlers.GetallUsuarios(db))
 
+	//Login
+	router.POST("/login")
+
 }
