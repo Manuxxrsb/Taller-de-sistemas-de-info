@@ -16,7 +16,7 @@ func ConfiguraRutas(router *gin.Engine) {
 		log.Fatalf("Error al conectarse a la BD: %v", err)
 	}
 
-	db.AutoMigrate(&models.Categoria{}, &models.Usuario{}, &models.Medicamento{})
+	db.AutoMigrate(&models.Usuario{}, &models.Categoria{}, &models.Medicamento{})
 
 	//POST
 	router.POST("/categoria", handlers.CreateCategoria(db))
@@ -30,6 +30,14 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.GET("/medicamentos", handlers.GetallMedicamentos(db))
 	router.GET("/usuario/:Id", handlers.GetUsuario(db))
 	router.GET("/usuarios", handlers.GetallUsuarios(db))
+
+	//delete
+	router.DELETE("/medicamentos/:id", handlers.DeleteMedicamento(db))
+	router.DELETE("/usuario/:id", handlers.Elimina_usuario(db))
+
+	//put
+	router.PUT("/medicamentos/:id", handlers.ActualizarMedicamento(db))
+	router.PUT("/usuario/:id", handlers.ActualizarUsuario(db))
 
 	//Login
 	router.POST("/login")

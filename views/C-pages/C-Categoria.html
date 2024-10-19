@@ -1,53 +1,88 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingresa Categoria</title>
-    <link rel="stylesheet" href="styles/estilos.css">
-</head>
-
-<body>
-    <h1 class="title-home">Ingresa una Categoria</h1>
-
-    <form id="myForm">
-        <label for="Nombre">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
-        <label for="descripcion">Descripcion:</label> <input type="text" id="descripcion" name="descripcion">
-        <button type="submit">Enviar</button>
-    </form>
-
-
+    <title>Agregar Categoría y Medicamentos</title>
     <script>
-        const form = document.getElementById('myForm');
+        function agregarMedicamento() {
+            const contenedor = document.getElementById("medicamentos");
+            const nuevoMedicamento = document.createElement("div");
+            nuevoMedicamento.innerHTML = `
+                <input type="text" name="nombre" placeholder="Nombre del Medicamento" required>
+                <input type="text" name="marca" placeholder="Marca" required>
+                <input type="text" name="descripcion" placeholder="Descripción" required>
+                <input type="text" name="numerolote" placeholder="Número de Lote" required>
+                <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
+                <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
+                <input type="number" name="stock" placeholder="Stock" required>
+                <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
+            `;
+            contenedor.appendChild(nuevoMedicamento);
+        }
 
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Evita el envío del formulario por defecto
+        function eliminarMedicamento(boton) {
+            const contenedor = boton.parentNode;
+            contenedor.parentNode.removeChild(contenedor);
+        }
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+        function enviarFormulario(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const categoria = {
+                nombre: formData.get("nombre_categoria"),
+                descripcion: formData.get("descripcion_categoria"),
+                medicamentos: []
+            };
 
-            // Convertir el objeto a JSON
-            const jsonData = JSON.stringify(data);
+            // Recopilar medicamentos
+            const medicamentos = document.querySelectorAll("#medicamentos > div");
+            medicamentos.forEach(medicamento => {
+                const nombre = medicamento.querySelector('input[name="nombre"]').value;
+                const marca = medicamento.querySelector('input[name="marca"]').value;
+                const descripcion = medicamento.querySelector('input[name="descripcion"]').value;
+                const numerolote = medicamento.querySelector('input[name="numerolote"]').value;
+                const fechafabric = medicamento.querySelector('input[name="fechafabric"]').value;
+                const fechavence = medicamento.querySelector('input[name="fechavence"]').value;
+                const stock = medicamento.querySelector('input[name="stock"]').value;
 
-            // Enviar la solicitud al backend (ejemplo con Fetch)
-            fetch('http://localhost:8080/categoria', {
+                categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock });
+            });
+
+            // Enviar datos al backend
+            const url = 'http://localhost:8080/categoria'
+            fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: jsonData
+                body: JSON.stringify(categoria),
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Respuesta del servidor:', data);
+                    console.log('Éxito:', data);
+                    alert('Categoría y medicamentos agregados correctamente');
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error('Error:', error);
                 });
-        });
+        }
     </script>
+</head>
 
+<body>
+    <h1>Agregar Categoría y Medicamentos</h1>
+    <form onsubmit="enviarFormulario(event)">
+        <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
+        <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
 
+        <h2>Medicamentos</h2>
+        <div id="medicamentos"></div>
+        <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
+
+        <button type="submit">Guardar</button>
+    </form>
 </body>
 
 </html>

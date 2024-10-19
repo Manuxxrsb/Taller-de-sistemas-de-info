@@ -17,6 +17,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -25,7 +26,6 @@
         </table>
     </div>
     <button onclick="prueba()">Obtener informacion</button>
-
 
     <script>
         function prueba() {
@@ -42,7 +42,11 @@
 
                         texto = texto + (`<tr><td>${lista[i].Id}</td>
                                 <td>${lista[i].nombre}</td>
-                                <td>${lista[i].apellido}</td></tr>
+                                <td>${lista[i].apellido}</td>
+                                <td>
+                                    <button onclick="eliminar(${lista[i].Id})">Eliminar</button>
+                                </td>
+                                </tr>
                                 `)
                     }
 
@@ -52,6 +56,20 @@
                 })
                 .catch(error => console.error(error))
         }
+
+        function eliminar(id) {
+            const url = `http://localhost:8080/usuario/${id}`
+            fetch(url, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    prueba()
+                })
+                .catch(error => console.error(error))
+        }
+
+
+
     </script>
 </body>
 

@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/estilos.css">
-    <title>Get-Usuarios</title>
+    <title>Get-Medicamentos</title>
 </head>
 
 <body>
     <h1 class="title-home">Medicamentos</h1>
+
+    <!-- Campo de búsqueda -->
+    <input type="text" id="searchInput" placeholder="Nombre/Marca" onkeyup="filterMedicamentos()">
+
     <table>
         <thead>
             <tr>
-                <th> ID Medicamento</th>
+                <th>ID Medicamento</th>
                 <th>NOMBRE MEDICAMENTO</th>
                 <th>MARCA</th>
                 <th>DESCRIPCION</th>
@@ -20,50 +24,161 @@
                 <th>Fechafabric</th>
                 <th>Fechavence</th>
                 <th>Stock</th>
+                <th>Acciones</th> <!-- Nueva columna para los botones -->
             </tr>
         </thead>
         <tbody class="Item-Medicamento"></tbody>
     </table>
 
+    <button onclick="prueba()">Obtener información</button>
 
-
-
-
-
-    <button onclick="prueba()">Obtener informacion</button>
-
-
-
-    <script>
-        function prueba() {
-
-            const url = 'http://localhost:8080/medicamentos'
-            fetch(url)
-                .then(response => response.json()) // accessing the API data as JSON
-                .then(data => {
-                    const lista = Object.values(data)
-                    const p = document.querySelector('tbody.Item-Medicamento')
-                    var texto = []//informacion que entrega el json
-                    for (let i = 0; i < lista.length; i++) {
-                        texto = texto + (`<tr>
-                                <td>${lista[i].Id}</td>
-                                <td>${lista[i].Nombre}</td>
-                                <td>${lista[i].Marca}</td>
-                                <td>${lista[i].descripcion}</td>
-                                <td>${lista[i].numerolote}</td>
-                                <td>${lista[i].fechafabric}</td>
-                                <td>${lista[i].fechavence}</td>
-                                <td>${lista[i].stock}</td>
-                                </tr>
-                                `)
-
-                    }
-
-                    p.innerHTML = texto
-                })
-                .catch(error => console.error(error))
-        }
-    </script>
+    <div id="editModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Medicamento</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <label for="editNombre">Nombre:</label>
+                <input type="text" id="editNombre" required>
+                <label for="editMarca">Marca:</label>
+                <input type="text" id="editMarca" required>
+                <label for="editDescripcion">Descripción:</label>
+                <input type="text" id="editDescripcion" required>
+                <label for="editNumerolote">Número de Lote:</label>
+                <input type="text" id="editNumerolote" required>
+                <label for="editFechafabric">Fecha de Fabricación:</label>
+                <input type="date" id="editFechafabric" required>
+                <label for="editFechavence">Fecha de Vencimiento:</label>
+                <input type="date" id="editFechavence" required>
+                <label for="editStock">Stock:</label>
+                <input type="number" id="editStock" required>
+                <button type="submit">Actualizar</button>
+            </form>
+        </div>
+    </div>
 </body>
+
+<script>
+    let medicamentosList = []; // Almacenar la lista de medicamentos
+
+    function prueba() {
+        const url = 'http://localhost:8080/medicamentos';
+        fetch(url)
+            .then(response => response.json()) // Acceder a los datos de la API como JSON
+            .then(data => {
+                medicamentosList = Object.values(data); // Guardar la lista de medicamentos
+                displayMedicamentos(medicamentosList); // Mostrar medicamentos
+            })
+            .catch(error => console.error(error));
+    }
+
+    function displayMedicamentos(lista) {
+        const p = document.querySelector('tbody.Item-Medicamento');
+        let texto = ''; // Información que entrega el JSON
+        for (let i = 0; i < lista.length; i++) {
+            texto += `<tr>
+                            <td>${lista[i].Id}</td>
+                            <td>${lista[i].nombre}</td>
+                            <td>${lista[i].marca}</td>
+                            <td>${lista[i].descripcion}</td>
+                            <td>${lista[i].numerolote}</td>
+                            <td>${lista[i].fechafabric}</td>
+                            <td>${lista[i].fechavence}</td>
+                            <td>${lista[i].stock}</td>
+                            <td>
+                                <button onclick="eliminarMedicamento(${lista[i].Id})">Eliminar</button>
+                                <button onclick="editarMedicamento(${lista[i].Id})">Editar</button>
+                            </td>
+                           </tr>`;
+        }
+        p.innerHTML = texto;
+    }
+
+    function filterMedicamentos() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase(); // Convertir a minúsculas para comparación
+        const filteredMedicamentos = medicamentosList.filter(medicamento => {
+            return (
+                medicamento.nombre.toLowerCase().includes(filter) ||
+                medicamento.marca.toLowerCase().includes(filter) ||
+                medicamento.descripcion.toLowerCase().includes(filter)
+            );
+        });
+        displayMedicamentos(filteredMedicamentos); // Mostrar los medicamentos filtrados
+    }
+
+    function eliminarMedicamento(id) {
+        const url = `http://localhost:8080/medicamentos/${id}`; // URL para eliminar el medicamento
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Medicamento eliminado con éxito.');
+                    prueba(); // Volver a cargar la lista de medicamentos
+                } else {
+                    alert('Error al eliminar el medicamento.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function editarMedicamento(id) {
+        const medicamento = medicamentosList.find(m => m.Id === id);
+        if (medicamento) {
+            document.getElementById('editId').value = medicamento.Id;
+            document.getElementById('editNombre').value = medicamento.nombre;
+            document.getElementById('editMarca').value = medicamento.marca;
+            document.getElementById('editDescripcion').value = medicamento.descripcion;
+            document.getElementById('editNumerolote').value = medicamento.numerolote;
+            document.getElementById('editFechafabric').value = medicamento.fechafabric;
+            document.getElementById('editFechavence').value = medicamento.fechavence;
+            document.getElementById('editStock').value = medicamento.stock;
+
+            document.getElementById('editModal').style.display = 'block';
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+
+    document.getElementById('editForm').addEventListener('submit', actualizarMedicamento);
+
+    function actualizarMedicamento(event) {
+        event.preventDefault();
+        const id = document.getElementById('editId').value;
+        const medicamentoActualizado = {
+            nombre: document.getElementById('editNombre').value,
+            marca: document.getElementById('editMarca').value,
+            descripcion: document.getElementById('editDescripcion').value,
+            numerolote: document.getElementById('editNumerolote').value,
+            fechafabric: document.getElementById('editFechafabric').value,
+            fechavence: document.getElementById('editFechavence').value,
+            stock: document.getElementById('editStock').value
+        };
+
+        fetch(`http://localhost:8080/medicamentos/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(medicamentoActualizado)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Medicamento actualizado con éxito.');
+                    cerrarModal();
+                    prueba(); // Recargar la lista de medicamentos
+                } else {
+                    alert('Error al actualizar el medicamento.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+</script>
+
+
 
 </html>

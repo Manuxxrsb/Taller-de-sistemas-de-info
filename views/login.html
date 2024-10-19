@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Inicio de Sesión</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -24,30 +23,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .text-center {
-            color: rgba(230, 216, 156, 0.918);
-            text-shadow:
-                -1px -1px 0px black,
-                1px -1px 0px black,
-                -1px 1px 0px black,
-                1px 1px 0px black;
-        }
-
-        .form-label {
-            color: rgb(210, 233, 8);
-        }
-
-        .title-home {
-            color: rgba(230, 216, 156, 0.918);
-            padding-top: 10px;
-            text-shadow:
-
-                -1px -1px 0px black,
-                1px -1px 0px black,
-                -1px 1px 0px black,
-                1px 1px 0px black;
-        }
     </style>
 </head>
 
@@ -55,16 +30,14 @@
 
     <div class="login-container">
         <h2 class="text-center">Iniciar Sesión</h2>
-        <form id="myForm">
+        <form id="loginForm">
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo"
-                    required>
+                <input type="email" class="form-control" id="email" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password"
-                    placeholder="Ingrese su contraseña" required>
+                <input type="password" class="form-control" id="password" required>
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Ingresar</button>
@@ -72,49 +45,7 @@
         </form>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // Capturamos el evento de submit del formulario
-        const form = document.getElementById('myForm');
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-            // Crear un objeto con los datos del formulario
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            const jsonData = JSON.stringify(data);
-
-            const url = 'http://localhost:8080/login';
-
-            // Realizamos la solicitud al servidor
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' // Asegurar el uso correcto de JSON
-                },
-                body: jsonData
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la solicitud');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Aquí puedes manejar la respuesta que recibes del backend
-                    const lista = Object.values(data)
-                    console.log('Respuesta del servidor:', data);
-                    alert('Login exitoso: ' + JSON.stringify(data)); // Muestra el resultado
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error en el login');
-                });
-        });
-    </script>
+    <script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
 
 </body>
 
