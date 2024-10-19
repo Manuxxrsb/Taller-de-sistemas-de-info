@@ -5,31 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/estilos.css">
     <title>Index</title>
-</head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
 
+        .func {
+            background-color: #c827ce;
+            color: #eef10b;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .title-home-h {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .img-header {
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+
+        .funcionalidades {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .title-home {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .navbar {
+            background-color: #db4bc8;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(224, 13, 214, 0.2);
+        }
+
+        .func-li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        .func-li a {
+            color: #ccee0d;
+            text-decoration: none;
+        }
+
+        .links {
+            background-color: #db4bc8;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
 <header class="func">
     <h1 class="title-home-h">Farmacias La estrella</h1>
-    <img class="img-header" src="img/icon.svg" width=10% height=15%>
+    <img class="img-header" src="ClientesPages/img/icon.svg" width=10% height=15%>
 </header>
 
 <body>
-
     <div class="funcionalidades">
-
         <h1 class="title-home">Funcionalidades</h1>
-
         <nav class="navbar">
             <ul class="func">
                 <li class="func-li"> <a href="G_Pages/usuarios.html">Mostrar Usuarios</a></li>
                 <li class="func-li"> <a href="G_Pages/categorias.html">Mostrar Categorias</a></li>
                 <li class="func-li"> <a href="G_Pages/medicamentos.html">Mostrar Medicamentos</a></li>
+                <li class="func-li"><a href="C-pages/C-Categoria.html"> Crear Categoria</li>
+                <li class="func-li"><a href="C-pages/C-Medicamento.html"> Crear Medicamento</a></li>
+                <li class="func-li"><a href="C-pages/C-Usuario.html"> Crear usuario </a></li>
+
+
             </ul>
         </nav>
-
-
     </div>
 </body>
-
 <footer class="links">
     <ul class="func">
         <li class="func-li">home</li>

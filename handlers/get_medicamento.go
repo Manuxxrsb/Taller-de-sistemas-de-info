@@ -31,3 +31,16 @@ func GetallMedicamentos(db *gorm.DB) gin.HandlerFunc {
 		informacion.JSON(http.StatusOK, medicamentos)
 	}
 }
+
+func GetMedicamentosByCategoria(db *gorm.DB) gin.HandlerFunc {
+	return func(informacion *gin.Context) {
+		id_categoria := informacion.Param("Id_categoria")
+		var medicamentos []models.Medicamento
+		err := db.Where("categoria_id = ?", id_categoria).Find(&medicamentos).Error
+		if err != nil {
+			informacion.JSON(http.StatusInternalServerError, gin.H{"error": "Error al buscar medicamentos por categoria"})
+			return
+		}
+		informacion.JSON(http.StatusOK, medicamentos)
+	}
+}

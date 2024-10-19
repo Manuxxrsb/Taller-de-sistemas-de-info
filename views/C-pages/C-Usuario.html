@@ -8,10 +8,12 @@
 
 <body>
     <h1 class="title-home">Ingresa un Usuario</h1>
-    <form id="myForm">
-        <label for="Nombre" class="title-home">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
-        <label for="Apellido" class="title-home">Apellido:</label> <input type="text" id="Apellido" name="Apellido">
-        <button type="submit">Enviar</button>
+    <form id="myForm" class="title-home">
+        <label for="Nombre">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
+        <label for="Apellido">Apellido:</label> <input type="text" id="Apellido" name="Apellido">
+        <label for="Correo">Correo:</label> <input type="email" id="Correo" name="Correo">
+        <label for="Contrasena">Contraseña:</label> <input type="password" id="Contrasena" name="Contrasena">
+        <button type="submit" class="title-home">Enviar</button>
     </form>
 
     <script>
@@ -46,8 +48,6 @@
                     console.error('Error:', error);
                 });
         });
-
-
     </script>
 
 </body>
