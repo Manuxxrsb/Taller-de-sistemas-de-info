@@ -1,4 +1,4 @@
 {
     "editor.formatOnSave": true,
-    "livePreview.defaultPreviewPath": "/views/Examples/ejemplo_Tarjeta_busqueda.html"
+    "livePreview.defaultPreviewPath": "/views/ClientesPages/VistaPrueba.html"
 }

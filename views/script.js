@@ -13,6 +13,10 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         alert('Inicio de sesión exitoso');
         // Redirigir a otra página, por ejemplo, index.html
         window.location.href = 'index.html';
+    } else if (email != '' && password != '') {
+        alert('Bienvenido');
+        // Redirigir a otra página, por ejemplo, index.html
+        window.location.href = 'ClientesPages/VistaPrincipal.html';
     } else {
         alert('Credenciales inválidas');
     }

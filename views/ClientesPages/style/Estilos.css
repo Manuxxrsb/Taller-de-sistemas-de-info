@@ -1,23 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffffff, #add8e6, #87ceeb);
+    width: auto;
+    height: auto;
+}
+
 form {
     width: 300px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #87ceeb;
-    color: #ffffff;
+    border: 1px solid #add8e6;
+    color: #0000ff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #add8e6;
+    background-color: #ffffff;
 }
 
 .title-home {
-    color: #ffffff;
+    color: #0000ff;
     padding-top: 10px;
     text-shadow:
-        -1px -1px 0px #0000ff,
-        1px -1px 0px #0000ff,
-        -1px 1px 0px #0000ff,
-        1px 1px 0px #0000ff;
+        -1px -1px 0px #ffffff,
+        1px -1px 0px #ffffff,
+        -1px 1px 0px #ffffff,
+        1px 1px 0px #ffffff;
 }
+
+
+.card {
+    background: linear-gradient(to bottom, #ffffff, #add8e6, #87ceeb);
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #add8e6;
+    color: #0000ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 label {
     display: block;
@@ -30,62 +54,62 @@ input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #87ceeb;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 input[type="email"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #87ceeb;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #87ceeb;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 input[type="date"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #87ceeb;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 input[type="number"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #87ceeb;
+    border: 1px solid #add8e6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #87ceeb;
-    color: #ffffff;
+    background-color: #add8e6;
+    color: #0000ff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -93,13 +117,5 @@ button {
 }
 
 button:hover {
-    background-color: #4682b4;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(to bottom, #ffffff, #87ceeb);
-    width: auto;
-    height: auto;
+    background-color: #87ceeb;
 }
