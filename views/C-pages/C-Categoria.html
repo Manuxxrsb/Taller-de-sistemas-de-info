@@ -9,6 +9,22 @@
 
 
 
+
+</head>
+
+<body>
+    <h1>Agregar Categoría y Medicamentos</h1>
+    <form onsubmit="enviarFormulario(event)">
+        <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
+        <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
+
+        <h2>Medicamentos</h2>
+        <div id="medicamentos"></div>
+        <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
+
+        <button type="submit">Guardar</button>
+    </form>
+
     <script>
         function agregarMedicamento() {
             const contenedor = document.getElementById("medicamentos");
@@ -73,20 +89,6 @@
                 });
         }
     </script>
-</head>
-
-<body>
-    <h1>Agregar Categoría y Medicamentos</h1>
-    <form onsubmit="enviarFormulario(event)">
-        <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
-        <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
-
-        <h2>Medicamentos</h2>
-        <div id="medicamentos"></div>
-        <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
-
-        <button type="submit">Guardar</button>
-    </form>
 </body>
 
 </html>

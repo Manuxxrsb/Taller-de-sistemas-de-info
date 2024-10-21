@@ -22,6 +22,7 @@ func CreateCategoria(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
+		//en volah aqui estoy dplicando los medicamentos revisar
 		// Asignar el ID de la categoría a cada medicamento y guardarlos
 		for i := range categoria.Medicamentos {
 			categoria.Medicamentos[i].CategoriaID = categoria.Id_categoria

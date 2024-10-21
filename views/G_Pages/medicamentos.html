@@ -63,7 +63,7 @@
 
     function prueba() {
         const url = 'http://localhost:8080/medicamentos';
-        fetch(url)
+        fetch(url)//agregar informacion de que tipo es la reques para que no duplique en la bd
             .then(response => response.json()) // Acceder a los datos de la API como JSON
             .then(data => {
                 medicamentosList = Object.values(data); // Guardar la lista de medicamentos
