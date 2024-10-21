@@ -32,6 +32,7 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.GET("/usuarios", handlers.GetallUsuarios(db))
 
 	router.GET("/medbycategoria/:Id_categoria", handlers.GetMedicamentosByCategoria(db))
+	router.GET("/medBioequivalentes", handlers.GetBioequivalentes(db))
 
 	//delete
 	router.DELETE("/medicamentos/:id", handlers.DeleteMedicamento(db))

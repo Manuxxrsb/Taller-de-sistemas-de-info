@@ -11,7 +11,7 @@
     <h1 class="title-home">Medicamentos</h1>
 
     <!-- Campo de búsqueda -->
-    <input type="text" id="searchInput" placeholder="Nombre/Marca" onkeyup="filterMedicamentos()">
+    <input type="text" id="searchInput" placeholder="Busca tu Producto" onkeyup="filterMedicamentos()">
 
     <table>
         <thead>
@@ -24,13 +24,18 @@
                 <th>Fechafabric</th>
                 <th>Fechavence</th>
                 <th>Stock</th>
+                <th>Categoria</th>
+                <th>Bioequivalente</th>
+                <th>Precio</th>
                 <th>Acciones</th> <!-- Nueva columna para los botones -->
             </tr>
         </thead>
         <tbody class="Item-Medicamento"></tbody>
     </table>
 
-    <button onclick="prueba()">Obtener información</button>
+    <button onclick="prueba()">Obtener Medicamentos</button>
+    <button id="Bioequivalente">Bioequivalentes</button>
+
 
     <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
@@ -50,9 +55,18 @@
                 <input type="date" id="editFechafabric" required>
                 <label for="editFechavence">Fecha de Vencimiento:</label>
                 <input type="date" id="editFechavence" required>
+
                 <label for="editStock">Stock:</label>
                 <input type="number" id="editStock" required>
+
+                <label for="editBioequivalente">Bioequivalente</label>
+                <input type="checkbox" id="editBioequivalente" required>
+
+                <label for="editPrecio">Precio</label>
+                <input type="number" id="editPrecio" required>
+
                 <button type="submit">Actualizar</button>
+
             </form>
         </div>
     </div>
@@ -85,6 +99,9 @@
                             <td>${lista[i].fechafabric}</td>
                             <td>${lista[i].fechavence}</td>
                             <td>${lista[i].stock}</td>
+                            <td>${lista[i].CategoriaID}</td>
+                            <td>${lista[i].bioequivalente}</td> 
+                            <td>${lista[i].precio}</td>	
                             <td>
                                 <button onclick="eliminarMedicamento(${lista[i].Id})">Eliminar</button>
                                 <button onclick="editarMedicamento(${lista[i].Id})">Editar</button>
@@ -101,13 +118,21 @@
             return (
                 medicamento.nombre.toLowerCase().includes(filter) ||
                 medicamento.marca.toLowerCase().includes(filter) ||
-                medicamento.descripcion.toLowerCase().includes(filter)
+                medicamento.descripcion.toLowerCase().includes(filter) ||
+                medicamento.numerolote.toLowerCase().includes(filter) ||
+                medicamento.fechafabric.toLowerCase().includes(filter) ||
+                medicamento.fechavence.toLowerCase().includes(filter) ||
+                medicamento.stock.toString().includes(filter) ||
+                medicamento.CategoriaID.toString().includes(filter) ||
+                medicamento.bioequivalente.toString().includes(filter) ||
+                medicamento.precio.toString().includes(filter)
+
             );
         });
         displayMedicamentos(filteredMedicamentos); // Mostrar los medicamentos filtrados
     }
 
-    function eliminarMedicamento(id) {
+    function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
         const url = `http://localhost:8080/medicamentos/${id}`; // URL para eliminar el medicamento
         fetch(url, {
             method: 'DELETE'
@@ -134,6 +159,9 @@
             document.getElementById('editFechafabric').value = medicamento.fechafabric;
             document.getElementById('editFechavence').value = medicamento.fechavence;
             document.getElementById('editStock').value = medicamento.stock;
+            document.getElementById('editBioequivalente').value = medicamento.bioequivalente;
+            document.getElementById('editPrecio').value = medicamento.precio;
+
 
             document.getElementById('editModal').style.display = 'block';
         }
@@ -155,7 +183,9 @@
             numerolote: document.getElementById('editNumerolote').value,
             fechafabric: document.getElementById('editFechafabric').value,
             fechavence: document.getElementById('editFechavence').value,
-            stock: document.getElementById('editStock').value
+            stock: document.getElementById('editStock').value,
+            bioequivalente: document.getElementById('editBioequivalente').value,
+            precio: document.getElementById('editPrecio').value
         };
 
         fetch(`http://localhost:8080/medicamentos/${id}`, {
@@ -176,6 +206,19 @@
             })
             .catch(error => console.error('Error:', error));
     }
+
+
+    document.getElementById('Bioequivalente').addEventListener('click', mostrarBioequivalentes);
+
+    function mostrarBioequivalentes() {
+        const medicamentosBioequivalentes = medicamentosList.filter(medicamento => {
+            return medicamento.CategoriaID === 'Bioequivalente';
+        });
+        displayMedicamentos(medicamentosBioequivalentes);
+    }
+
+
+
 
 </script>
 

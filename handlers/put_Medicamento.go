@@ -26,13 +26,15 @@ func ActualizarMedicamento(db *gorm.DB) gin.HandlerFunc {
 
 		// Actualizar solo los campos proporcionados
 		updateData := map[string]interface{}{
-			"Nombre":      input.Nombre,
-			"Marca":       input.Marca,
-			"Descripcion": input.Descripcion,
-			"Numerolote":  input.Numerolote,
-			"Fechafabric": input.Fechafabric,
-			"Fechavence":  input.Fechavence,
-			"Stock":       input.Stock,
+			"Nombre":         input.Nombre,
+			"Marca":          input.Marca,
+			"Descripcion":    input.Descripcion,
+			"Numerolote":     input.Numerolote,
+			"Fechafabric":    input.Fechafabric,
+			"Fechavence":     input.Fechavence,
+			"Stock":          input.Stock,
+			"Bioequivalente": input.Bioequivalente,
+			"Precio":         input.Precio,
 		}
 
 		if err := db.Model(&medicamento).Updates(updateData).Error; err != nil {

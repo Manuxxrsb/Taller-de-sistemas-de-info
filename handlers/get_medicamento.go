@@ -44,3 +44,15 @@ func GetMedicamentosByCategoria(db *gorm.DB) gin.HandlerFunc {
 		informacion.JSON(http.StatusOK, medicamentos)
 	}
 }
+
+func GetBioequivalentes(db *gorm.DB) gin.HandlerFunc {
+	return func(informacion *gin.Context) {
+		var medicamentos []models.Medicamento
+		err := db.Where("bioequivalente = ?", true).Find(&medicamentos).Error
+		if err != nil {
+			informacion.JSON(http.StatusInternalServerError, gin.H{"error": "Error al buscar medicamentos bioequivalentes"})
+			return
+		}
+		informacion.JSON(http.StatusOK, medicamentos)
+	}
+}
