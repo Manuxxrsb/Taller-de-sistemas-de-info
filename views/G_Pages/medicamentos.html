@@ -34,25 +34,30 @@
     </table>
 
     <button onclick="prueba()">Obtener Medicamentos</button>
-    <button id="Bioequivalente">Bioequivalentes</button>
-
 
     <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Editar Medicamento</h2>
             <form id="editForm">
+
                 <input type="hidden" id="editId">
+
                 <label for="editNombre">Nombre:</label>
                 <input type="text" id="editNombre" required>
+
                 <label for="editMarca">Marca:</label>
                 <input type="text" id="editMarca" required>
+
                 <label for="editDescripcion">Descripción:</label>
                 <input type="text" id="editDescripcion" required>
+
                 <label for="editNumerolote">Número de Lote:</label>
                 <input type="text" id="editNumerolote" required>
+
                 <label for="editFechafabric">Fecha de Fabricación:</label>
                 <input type="date" id="editFechafabric" required>
+
                 <label for="editFechavence">Fecha de Vencimiento:</label>
                 <input type="date" id="editFechavence" required>
 
@@ -76,12 +81,12 @@
     let medicamentosList = []; // Almacenar la lista de medicamentos
 
     function prueba() {
-        const url = 'http://localhost:8080/medicamentos';
-        fetch(url)//agregar informacion de que tipo es la reques para que no duplique en la bd
+        // Llamar a la API para obtener la lista de medicamentos
+        fetch('http://localhost:8080/medicamentos')
             .then(response => response.json()) // Acceder a los datos de la API como JSON
             .then(data => {
-                medicamentosList = Object.values(data); // Guardar la lista de medicamentos
-                displayMedicamentos(medicamentosList); // Mostrar medicamentos
+                medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
+                displayMedicamentos(medicamentosList); // Funcioin Mostrar medicamentos
             })
             .catch(error => console.error(error));
     }
@@ -133,8 +138,7 @@
     }
 
     function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
-        const url = `http://localhost:8080/medicamentos/${id}`; // URL para eliminar el medicamento
-        fetch(url, {
+        fetch(`http://localhost:8080/medicamentos/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -147,6 +151,8 @@
             })
             .catch(error => console.error('Error:', error));
     }
+
+
 
     function editarMedicamento(id) {
         const medicamento = medicamentosList.find(m => m.Id === id);
@@ -161,7 +167,6 @@
             document.getElementById('editStock').value = medicamento.stock;
             document.getElementById('editBioequivalente').value = medicamento.bioequivalente;
             document.getElementById('editPrecio').value = medicamento.precio;
-
 
             document.getElementById('editModal').style.display = 'block';
         }
@@ -207,21 +212,7 @@
             .catch(error => console.error('Error:', error));
     }
 
-
-    document.getElementById('Bioequivalente').addEventListener('click', mostrarBioequivalentes);
-
-    function mostrarBioequivalentes() {
-        const medicamentosBioequivalentes = medicamentosList.filter(medicamento => {
-            return medicamento.CategoriaID === 'Bioequivalente';
-        });
-        displayMedicamentos(medicamentosBioequivalentes);
-    }
-
-
-
-
 </script>
-
 
 
 </html>

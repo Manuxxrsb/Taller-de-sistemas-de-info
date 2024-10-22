@@ -17,7 +17,6 @@
     <form onsubmit="enviarFormulario(event)">
         <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
         <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
-
         <h2>Medicamentos</h2>
         <div id="medicamentos"></div>
         <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
@@ -37,6 +36,8 @@
                 <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
                 <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
                 <input type="number" name="stock" placeholder="Stock" required>
+                <input type="checkbox" name="Bioequivalente" required>
+                <input type="number" name="Precio" placeholder="Precio" required>
                 <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
             `;
             contenedor.appendChild(nuevoMedicamento);
@@ -71,8 +72,8 @@
             });
 
             // Enviar datos al backend
-            const url = 'http://localhost:8080/categoria'
-            fetch(url, {
+
+            fetch('http://localhost:8080/categoria', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
