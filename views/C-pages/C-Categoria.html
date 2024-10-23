@@ -17,7 +17,7 @@
     <form onsubmit="enviarFormulario(event)">
         <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
         <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
-        <h2>Medicamentos</h2>
+        <h3>Medicamentos</h3>
         <div id="medicamentos"></div>
         <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
 
@@ -36,7 +36,11 @@
                 <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
                 <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
                 <input type="number" name="stock" placeholder="Stock" required>
-                <input type="checkbox" name="Bioequivalente" required>
+                <h3>Bioequivalente</h3>
+                <select id="editBioequivalente">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
                 <input type="number" name="Precio" placeholder="Precio" required>
                 <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
             `;
@@ -67,8 +71,10 @@
                 const fechafabric = medicamento.querySelector('input[name="fechafabric"]').value;
                 const fechavence = medicamento.querySelector('input[name="fechavence"]').value;
                 const stock = medicamento.querySelector('input[name="stock"]').value;
+                const bioequivalente = medicamento.querySelector('select[id="editBioequivalente"]').value;
+                const precio = medicamento.querySelector('input[name="Precio"]').value;
 
-                categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock });
+                categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock, bioequivalente, precio });
             });
 
             // Enviar datos al backend
@@ -86,7 +92,7 @@
                     alert('Categoría y medicamentos agregados correctamente');
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    alert('Error', error);
                 });
         }
     </script>

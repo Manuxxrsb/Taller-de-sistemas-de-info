@@ -44,31 +44,40 @@
                 <input type="hidden" id="editId">
 
                 <label for="editNombre">Nombre:</label>
-                <input type="text" id="editNombre" required>
+                <input type="text" id="editNombre">
 
                 <label for="editMarca">Marca:</label>
-                <input type="text" id="editMarca" required>
+                <input type="text" id="editMarca">
 
                 <label for="editDescripcion">Descripción:</label>
-                <input type="text" id="editDescripcion" required>
+                <input type="text" id="editDescripcion">
 
                 <label for="editNumerolote">Número de Lote:</label>
-                <input type="text" id="editNumerolote" required>
+                <input type="text" id="editNumerolote">
 
                 <label for="editFechafabric">Fecha de Fabricación:</label>
-                <input type="date" id="editFechafabric" required>
+                <input type="date" id="editFechafabric">
 
                 <label for="editFechavence">Fecha de Vencimiento:</label>
-                <input type="date" id="editFechavence" required>
+                <input type="date" id="editFechavence">
 
                 <label for="editStock">Stock:</label>
-                <input type="number" id="editStock" required>
+                <input type="number" id="editStock">
 
-                <label for="editBioequivalente">Bioequivalente</label>
-                <input type="checkbox" id="editBioequivalente" required>
+
+                <label for="editBioequivalente">Bioequivalente:</label>
+                <select id="editBioequivalente">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+
+
+
 
                 <label for="editPrecio">Precio</label>
-                <input type="number" id="editPrecio" required>
+                <input type="number" id="editPrecio">
+
+
 
                 <button type="submit">Actualizar</button>
 
@@ -165,11 +174,13 @@
             document.getElementById('editFechafabric').value = medicamento.fechafabric;
             document.getElementById('editFechavence').value = medicamento.fechavence;
             document.getElementById('editStock').value = medicamento.stock;
-            document.getElementById('editBioequivalente').value = medicamento.bioequivalente;
+            //document.getElementById('editBioequivalente').value = medicamento.bioequivalente;
             document.getElementById('editPrecio').value = medicamento.precio;
+            console.log(medicamento.bioequivalente);
 
             document.getElementById('editModal').style.display = 'block';
         }
+
     }
 
     function cerrarModal() {
@@ -189,9 +200,11 @@
             fechafabric: document.getElementById('editFechafabric').value,
             fechavence: document.getElementById('editFechavence').value,
             stock: document.getElementById('editStock').value,
-            bioequivalente: document.getElementById('editBioequivalente').value,
-            precio: document.getElementById('editPrecio').value
+            bioequivalente: document.getElementById('editBioequivalente').value, // Mantener como string
+            precio: document.getElementById('editPrecio').value,
         };
+
+        console.log('Bioequivalente:', medicamentoActualizado.bioequivalente);
 
         fetch(`http://localhost:8080/medicamentos/${id}`, {
             method: 'PUT',

@@ -8,8 +8,8 @@ type Medicamento struct {
 	Numerolote     string `json:"numerolote"`
 	Fechafabric    string `json:"fechafabric"`
 	Fechavence     string `json:"fechavence"`
-	Bioequivalente bool   `json:"bioequivalente"` //Bioequivalentes logica
-	Precio         int    `json:"precio"`
+	Bioequivalente string `json:"bioequivalente"` //Bioequivalentes logica
+	Precio         string `json:"precio"`
 	Stock          string `json:"stock"`
 	CategoriaID    int    `gorm:"index"` // Clave foránea
 }

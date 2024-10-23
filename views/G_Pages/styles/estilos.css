@@ -210,6 +210,17 @@ input[type="password"] {
     background-color: #f0f0f0;
 }
 
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #87ceeb;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #f0f0f0;
+}
+
 input[type="date"] {
     width: 100%;
     padding: 10px;
