@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -56,25 +57,10 @@
             <!-- Aquí se cargarán los medicamentos de la base de datos -->
             <option value="">Seleccione un medicamento</option>
         </select>
-        <div id="informacion"></div>
-        <button id="modificar-btn">Modificar</button>
-    </form>
 
-    <div id="modificar">
-        <div id="modificar-form">
-            <h2>Modificar Medicamento</h2>
-            <form>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre"><br><br>
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion"></textarea><br><br>
-                <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio"><br><br>
-                <button id="guardar-btn">Guardar</button>
-                <button id="cancelar-btn">Cancelar</button>
-            </form>
-        </div>
-    </div>
+
+    </form>
+    <div id="informacion"></div>
 
     <script>
         // Cargar medicamentos de la base de datos
@@ -91,75 +77,8 @@
             })
             .catch(error => console.error('Error:', error));
 
-        // Mostrar información del medicamento seleccionado
-        document.getElementById('medicamento').addEventListener('change', function () {
-            const idMedicamento = this.value;
-            fetch(`/api/medicamentos/${idMedicamento}`)
-                .then(response => response.json())
-                .then(data => {
-                    const informacion = document.getElementById('informacion');
-                    informacion.innerHTML = `
-                        <h2>${data.nombre}</h2>
-                        <p>Descripción: ${data.descripcion}</p>
-                        <p>Precio: ${data.precio}</p>
-                    `;
-                })
-                .catch(error => console.error('Error:', error));
-        });
 
-        // Mostrar ventana para modificar información del medicamento seleccionado
-        document.getElementById('modificar-btn').addEventListener('click', function () {
-            const idMedicamento = document.getElementById('medicamento').value;
-            fetch(`/api/medicamentos/${idMedicamento}`)
-                .then(response => response.json())
-                .then(data => {
-                    const modificarForm = document.getElementById('modificar-form');
-                    modificarForm.innerHTML = `
-                        <h2>Modificar Medicamento</h2>
-                        <form>
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value="${data.nombre}"><br><br>
-                            <label for="descripcion">Descripción:</label>
-                            <textarea id="descripcion" name="descripcion">${data.descripcion}</textarea><br><br>
-                            <label for="precio">Precio:</label>
-                            <input type="number" id="precio" name="precio" value="${data.precio}"><br><br>
-                            <button id="guardar-btn">Guardar</button>
-                            <button id="cancelar-btn">Cancelar</button>
-                        </form>
-                    `;
-                    document.getElementById('modificar').style.display = 'flex';
-                })
-                .catch(error => console.error('Error:', error));
-        });
 
-        // Guardar cambios en la información del medicamento seleccionado
-        document.getElementById('modificar-form').addEventListener('click', function (e) {
-            if (e.target.id === 'guardar-btn') {
-                const idMedicamento = document.getElementById('medicamento').value;
-                const nombre = document.getElementById('nombre').value;
-                const descripcion = document.getElementById('descripcion').value;
-                const precio = document.getElementById('precio').value;
-                fetch(`/api/medicamentos/${idMedicamento}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        nombre: nombre,
-                        descripcion: descripcion,
-                        precio: precio
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        document.getElementById('modificar').style.display = 'none';
-                    })
-                    .catch(error => console.error('Error:', error));
-            } else if (e.target.id === 'cancelar-btn') {
-                document.getElementById('modificar').style.display = 'none';
-            }
-        });
     </script>
 </body>
 

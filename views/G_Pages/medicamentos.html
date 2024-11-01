@@ -71,8 +71,10 @@
                     <option value="false">No</option>
                 </select>
 
+                <label for="editCategoria">Categoria</label>
+                <select id="editCategoria">
 
-
+                </select>
 
                 <label for="editPrecio">Precio</label>
                 <input type="number" id="editPrecio">
@@ -88,6 +90,33 @@
 
 <script>
     let medicamentosList = []; // Almacenar la lista de medicamentos
+    //actual area de trabajo
+
+    function obtenerCategorias() {
+        fetch('http://localhost:8080/categorias')
+            .then(response => response.json())
+            .then(data => {
+                const categoriasList = Object.values(data);
+                const categoriasNombreValor = categoriasList.map(categoria => ({ nombre: categoria.nombre, valor: categoria.id }));
+                categorias = categoriasNombreValor; // Guardar la lista de categorías en la variable categorias
+                // Agregar opciones a la lista de categorías en el formulario de edición
+                const selectCategoria = document.getElementById('editCategoria');
+                categoriasNombreValor.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.valor;
+                    option.text = categoria.nombre;
+                    selectCategoria.appendChild(option);
+                });
+                return categoriasNombreValor;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    let categorias = obtenerCategorias()
+
+
+
+
+    //-------------------------------------------------
 
     function prueba() {
         // Llamar a la API para obtener la lista de medicamentos
@@ -174,10 +203,8 @@
             document.getElementById('editFechafabric').value = medicamento.fechafabric;
             document.getElementById('editFechavence').value = medicamento.fechavence;
             document.getElementById('editStock').value = medicamento.stock;
-            //document.getElementById('editBioequivalente').value = medicamento.bioequivalente;
             document.getElementById('editPrecio').value = medicamento.precio;
-            console.log(medicamento.bioequivalente);
-
+            document.getElementById('editCategoria').value = medicamento.CategoriaID; //funca
             document.getElementById('editModal').style.display = 'block';
         }
 
@@ -201,10 +228,9 @@
             fechavence: document.getElementById('editFechavence').value,
             stock: document.getElementById('editStock').value,
             bioequivalente: document.getElementById('editBioequivalente').value, // Mantener como string
+            categoria: document.getElementById('editCategoria').value,
             precio: document.getElementById('editPrecio').value,
         };
-
-        console.log('Bioequivalente:', medicamentoActualizado.bioequivalente);
 
         fetch(`http://localhost:8080/medicamentos/${id}`, {
             method: 'PUT',
