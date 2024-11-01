@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Medicamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #medicamento {
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #informacion {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #modificar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modificar-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Seleccionar Medicamento</h1>
+    <form>
+        <label for="medicamento">Seleccione un medicamento:</label>
+        <select id="medicamento" name="medicamento">
+            <!-- Aquí se cargarán los medicamentos de la base de datos -->
+            <option value="">Seleccione un medicamento</option>
+        </select>
+        <div id="informacion"></div>
+        <button id="modificar-btn">Modificar</button>
+    </form>
+
+    <div id="modificar">
+        <div id="modificar-form">
+            <h2>Modificar Medicamento</h2>
+            <form>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre"><br><br>
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion"></textarea><br><br>
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio"><br><br>
+                <button id="guardar-btn">Guardar</button>
+                <button id="cancelar-btn">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Cargar medicamentos de la base de datos
+        fetch('http://localhost:8080/medicamentos')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('medicamento');
+                data.forEach(medicamento => {
+                    const option = document.createElement('option');
+                    option.value = medicamento.id;
+                    option.text = medicamento.nombre;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+
+        // Mostrar información del medicamento seleccionado
+        document.getElementById('medicamento').addEventListener('change', function () {
+            const idMedicamento = this.value;
+            fetch(`/api/medicamentos/${idMedicamento}`)
+                .then(response => response.json())
+                .then(data => {
+                    const informacion = document.getElementById('informacion');
+                    informacion.innerHTML = `
+                        <h2>${data.nombre}</h2>
+                        <p>Descripción: ${data.descripcion}</p>
+                        <p>Precio: ${data.precio}</p>
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Mostrar ventana para modificar información del medicamento seleccionado
+        document.getElementById('modificar-btn').addEventListener('click', function () {
+            const idMedicamento = document.getElementById('medicamento').value;
+            fetch(`/api/medicamentos/${idMedicamento}`)
+                .then(response => response.json())
+                .then(data => {
+                    const modificarForm = document.getElementById('modificar-form');
+                    modificarForm.innerHTML = `
+                        <h2>Modificar Medicamento</h2>
+                        <form>
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" value="${data.nombre}"><br><br>
+                            <label for="descripcion">Descripción:</label>
+                            <textarea id="descripcion" name="descripcion">${data.descripcion}</textarea><br><br>
+                            <label for="precio">Precio:</label>
+                            <input type="number" id="precio" name="precio" value="${data.precio}"><br><br>
+                            <button id="guardar-btn">Guardar</button>
+                            <button id="cancelar-btn">Cancelar</button>
+                        </form>
+                    `;
+                    document.getElementById('modificar').style.display = 'flex';
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Guardar cambios en la información del medicamento seleccionado
+        document.getElementById('modificar-form').addEventListener('click', function (e) {
+            if (e.target.id === 'guardar-btn') {
+                const idMedicamento = document.getElementById('medicamento').value;
+                const nombre = document.getElementById('nombre').value;
+                const descripcion = document.getElementById('descripcion').value;
+                const precio = document.getElementById('precio').value;
+                fetch(`/api/medicamentos/${idMedicamento}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        descripcion: descripcion,
+                        precio: precio
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        document.getElementById('modificar').style.display = 'none';
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else if (e.target.id === 'cancelar-btn') {
+                document.getElementById('modificar').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
