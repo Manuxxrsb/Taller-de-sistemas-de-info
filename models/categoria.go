@@ -1,10 +1,12 @@
 package models
 
+import "gorm.io/gorm"
+
 type Categoria struct {
-	Id_categoria int           `gorm:"primaryKey;autoIncrement"`
-	Nombre       string        `json:"nombre"`
-	Descripcion  string        `json:"descripcion"`
-	Medicamentos []Medicamento `gorm:"foreignKey:CategoriaID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	gorm.Model
+	Nombre       string `json:"nombre"`
+	Descripcion  string `json:"descripcion"`
+	Medicamentos []Medicamento
 }
 
 func (Categoria) TableName() string {

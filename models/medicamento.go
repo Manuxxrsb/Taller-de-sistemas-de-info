@@ -1,17 +1,20 @@
 package models
 
+import "gorm.io/gorm"
+
 type Medicamento struct {
-	Id             int    `gorm:"primaryKey;autoIncrement"`
+	gorm.Model
 	Nombre         string `json:"nombre"`
 	Marca          string `json:"marca"`
 	Descripcion    string `json:"descripcion"`
 	Numerolote     string `json:"numerolote"`
 	Fechafabric    string `json:"fechafabric"`
 	Fechavence     string `json:"fechavence"`
-	Bioequivalente string `json:"bioequivalente"` //Bioequivalentes logica
+	Bioequivalente string `json:"bioequivalente"`
 	Precio         string `json:"precio"`
 	Stock          string `json:"stock"`
-	CategoriaID    int    `gorm:"index"` // Clave foránea
+	CategoriaID    uint   //Clave foranea
+	ProveedorID    uint   //Clave foranea
 }
 
 func (Medicamento) TableName() string {

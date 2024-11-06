@@ -1,11 +1,13 @@
 package models
 
+import "gorm.io/gorm"
+
 type Boleta struct {
-	Id          int           `gorm:"primaryKey ;autoIncrement"`
-	Email       string        `json:"email"`
-	Medicamento []Medicamento `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	gorm.Model
+	Email       string `json:"email"`
+	Medicamento []Medicamento
 }
 
 func (Boleta) TableName() string {
-	return "Boleta"
+	return "boleta"
 }
