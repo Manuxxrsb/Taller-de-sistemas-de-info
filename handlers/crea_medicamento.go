@@ -9,16 +9,16 @@ import (
 )
 
 func CreateMedicamento(db *gorm.DB) gin.HandlerFunc {
-	return func(informacion *gin.Context) {
+	return func(Request *gin.Context) {
 		var medicamento models.Medicamento
-		if err := informacion.ShouldBindJSON(&medicamento); err != nil { //verificamos info
-			informacion.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		if err := Request.ShouldBindJSON(&medicamento); err != nil {
+			Request.JSON(http.StatusBadRequest, gin.H{"Respuesta": "Error al recibir la información " + err.Error()})
 			return
 		}
-		if err := db.Create(&medicamento).Error; err != nil { // creamos la Lote en la bd y controlamos el error
-			informacion.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		if err := db.Create(&medicamento).Error; err != nil {
+			Request.JSON(http.StatusInternalServerError, gin.H{"Mensaje": "Error al crear Medicamento " + err.Error()})
 			return
 		}
-		informacion.JSON(http.StatusOK, medicamento)
+		Request.JSON(http.StatusOK, medicamento)
 	}
 }
