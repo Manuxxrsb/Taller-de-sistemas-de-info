@@ -32,6 +32,8 @@ func GetallMedicamentos(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
+// ----------------------------------------------------
+// evaluar si sirven estas funciones
 func GetMedicamentosByCategoria(db *gorm.DB) gin.HandlerFunc {
 	return func(informacion *gin.Context) {
 		id_categoria := informacion.Param("Id_categoria")

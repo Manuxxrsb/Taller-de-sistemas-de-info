@@ -16,6 +16,10 @@ func GetCategoria(db *gorm.DB) gin.HandlerFunc {
 			informacion.JSON(http.StatusNotFound, gin.H{"error": "Categoria no encontrada"})
 			return
 		}
+
+		//Asociaciones
+		db.Model(&categoria).Association("Medicamentos").Find(&categoria.Medicamentos)
+
 		informacion.JSON(http.StatusOK, categoria)
 	}
 }
