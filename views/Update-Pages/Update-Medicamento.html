@@ -11,75 +11,88 @@
             font-family: Arial, sans-serif;
         }
 
-        #medicamento {
-            width: 200px;
-            height: 30px;
-            font-size: 16px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        #medicamento,
+        #categoria {
+            width: 300px;
+            height: 40px;
+            font-size: 18px;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
         #informacion {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        #modificar {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        #modificar-form {
-            background-color: #fff;
-            padding: 20px;
+            margin-top: 30px;
+            padding: 30px;
+            border: 2px solid #ccc;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: #f9f9f9;
+            width: 500px;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        #div {
+            height: 100px;
+
         }
     </style>
 </head>
 
 <body>
     <h1>Seleccionar Medicamento</h1>
-    <form>
+    <form id="medicamento-form">
         <label for="medicamento">Seleccione un medicamento:</label>
         <select id="medicamento" name="medicamento">
-            <!-- Aquí se cargarán los medicamentos de la base de datos -->
             <option value="">Seleccione un medicamento</option>
         </select>
 
-
+        <label for="categoria">Seleccione una categoría:</label>
+        <select id="categoria" name="categoria">
+            <option value="">Seleccione una categoría</option>
+        </select>
     </form>
     <div id="informacion"></div>
 
     <script>
-        // Cargar medicamentos de la base de datos
-        fetch('http://localhost:8080/medicamentos')
-            .then(response => response.json())
-            .then(data => {
-                const select = document.getElementById('medicamento');
-                data.forEach(medicamento => {
-                    const option = document.createElement('option');
-                    option.value = medicamento.id;
-                    option.text = medicamento.nombre;
-                    select.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error:', error));
+        document.getElementById('medicamento').addEventListener('change', function () {
+            const idMedicamento = this.value;
+            if (idMedicamento) { // Verifica que idMedicamento no sea vacío
+                fetch(`http://localhost:8080/medicamentos/${idMedicamento}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const informacion = document.getElementById('informacion');
+                        informacion.innerHTML = `
+                    <h2>Información del medicamento</h2>
+                    <p>Nombre: ${data.nombre}</p>
+                    <p>Descripción: ${data.descripcion}</p>
+                    <p>Precio: ${data.precio}</p>
+                `;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
 
-
-
+        document.getElementById('categoria').addEventListener('change', function () {
+            const idCategoria = this.value;
+            if (idCategoria) { // Verifica que idCategoria no sea vacío
+                fetch(`http://localhost:8080/categorias/${idCategoria}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const informacion = document.getElementById('informacion');
+                        informacion.innerHTML = `
+                    <h2>Información de la categoría</h2>
+                    <p>Nombre: ${data.nombre}</p>
+                    <p>Descripción: ${data.descripcion}</p>
+                `;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
     </script>
+
 </body>
 
 </html>
+```
