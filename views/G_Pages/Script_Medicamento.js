@@ -1,26 +1,24 @@
 //actual area de trabajo
-document.addEventListener('DOMContentLoaded', obtenerCategorias);
+//document.addEventListener('DOMContentLoaded', obtenerCategorias);
+
+
 function obtenerCategorias() {
     fetch('http://localhost:8080/categorias')
         .then(response => response.json())
         .then(data => {
             const categoriasList = Object.values(data);
-            const categoriasNombreValor = categoriasList.map(categoria => ({ nombre: categoria.nombre, valor: categoria.id }));
-            categorias = categoriasNombreValor; // Guardar la lista de categorías en la variable categorias
-
+            console.log(categoriasList);
             // Agregar opciones a la lista de categorías en el formulario de edición
-            const selectCategoria = document.getElementById('editCategoria');
-            selectCategoria.innerHTML = ''; // Limpiar las opciones existentes
-            categoriasNombreValor.forEach(categoria => {
-                const option = document.createElement('option');
-                option.value = categoria.valor;
-                option.text = categoria.nombre;
-                selectCategoria.appendChild(option);
-            });
+            let p = document.querySelector('select.editCategoria')
+            let texto = ''; // Información que entrega el JSON
+            for (let i = 0; i < categoriasList.length; i++) {
+                texto += `<option value="${categoriasList[i].ID}">${categoriasList[i].Nombre}</option>`;
+            }
+            p.innerHTML = texto;
+
         })
         .catch(error => console.error('Error:', error));
 }
-
 
 
 
@@ -35,14 +33,17 @@ function prueba() {
             displayMedicamentos(medicamentosList); // Funcioin Mostrar medicamentos
         })
         .catch(error => console.error(error));
+
+
 }
 
 function displayMedicamentos(lista) {
-    const p = document.querySelector('tbody.Item-Medicamento');
+    console.log(lista);
+    let p = document.querySelector('tbody.Item-Medicamento');
     let texto = ''; // Información que entrega el JSON
     for (let i = 0; i < lista.length; i++) {
         texto += `<tr>
-                        <td>${lista[i].Id}</td>
+                        <td>${lista[i].ID}</td>
                         <td>${lista[i].nombre}</td>
                         <td>${lista[i].marca}</td>
                         <td>${lista[i].descripcion}</td>
@@ -54,14 +55,16 @@ function displayMedicamentos(lista) {
                         <td>${lista[i].bioequivalente}</td> 
                         <td>${lista[i].precio}</td>	
                         <td>
-                            <button onclick="eliminarMedicamento(${lista[i].Id})">Eliminar</button>
-                            <button onclick="editarMedicamento(${lista[i].Id})">Editar</button>
+                            <button onclick="eliminarMedicamento(${lista[i].ID})">Eliminar</button>
+                            <button onclick="editarMedicamento(${lista[i].ID})">Editar</button>
                         </td>
                        </tr>`;
     }
     p.innerHTML = texto;
 }
 
+
+//----- Funcion para Filtrar medicamentos-------------------
 function filterMedicamentos() {
     const input = document.getElementById('searchInput');
     const filter = input.value.toLowerCase(); // Convertir a minúsculas para comparación
@@ -80,8 +83,11 @@ function filterMedicamentos() {
 
         );
     });
+
     displayMedicamentos(filteredMedicamentos); // Mostrar los medicamentos filtrados
 }
+
+//---------- BOTONES -----
 
 function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
     fetch(`http://localhost:8080/medicamentos/${id}`, {
@@ -101,9 +107,9 @@ function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el st
 
 
 function editarMedicamento(id) {
-    const medicamento = medicamentosList.find(m => m.Id === id);
+    const medicamento = medicamentosList.find(m => m.ID === id);
     if (medicamento) {
-        document.getElementById('editId').value = medicamento.Id;
+        document.getElementById('editId').value = medicamento.ID;
         document.getElementById('editNombre').value = medicamento.nombre;
         document.getElementById('editMarca').value = medicamento.marca;
         document.getElementById('editDescripcion').value = medicamento.descripcion;
@@ -117,9 +123,14 @@ function editarMedicamento(id) {
     }
 }
 
+//---------------------
+
 function cerrarModal() {
     document.getElementById('editModal').style.display = 'none';
 }
+
+
+//---------------- FORMULARIO DE EDICION DE MEDICAMENTO -----------------
 
 document.getElementById('editForm').addEventListener('submit', actualizarMedicamento);
 

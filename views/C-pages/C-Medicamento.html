@@ -18,6 +18,12 @@
         <label for="fechafabric">Fechafabric:</label> <input type="date" id="fechafabric" name="fechafabric">
         <label for="fechavence">Fechavence:</label> <input type="date" id="fechavence" name="fechavence">
         <label for="stock">Stock:</label> <input type="number" id="stock" name="stock">
+        <label for="Bioequivalente">Bioequivalente:</label>
+        <select id="Bioequivalente">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+        </select>
+        <label for="categoria">Categoria: <select id="categoria"></select></label>
         <button type="submit">Enviar</button>
     </form>
 
@@ -27,11 +33,11 @@
         <h2>Agregar Medicamento</h2>
         <form id="agregar-medicamento-form">
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre"><br><br>
+            <input type="text" id="nombre" name="nombre">
             <label for="categoria">Categoría:</label>
             <select id="categoria" name="categoria">
                 <!-- opciones de categoría -->
-            </select><br><br>
+            </select>
             <input type="submit" value="Agregar">
         </form>
     </div>

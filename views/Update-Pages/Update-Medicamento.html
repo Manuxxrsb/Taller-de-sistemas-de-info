@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,54 +44,18 @@
     <form id="medicamento-form">
         <label for="medicamento">Seleccione un medicamento:</label>
         <select id="medicamento" name="medicamento">
-            <option value="">Seleccione un medicamento</option>
+
         </select>
 
         <label for="categoria">Seleccione una categoría:</label>
         <select id="categoria" name="categoria">
-            <option value="">Seleccione una categoría</option>
+
         </select>
     </form>
     <div id="informacion"></div>
 
-    <script>
-        document.getElementById('medicamento').addEventListener('change', function () {
-            const idMedicamento = this.value;
-            if (idMedicamento) { // Verifica que idMedicamento no sea vacío
-                fetch(`http://localhost:8080/medicamentos/${idMedicamento}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const informacion = document.getElementById('informacion');
-                        informacion.innerHTML = `
-                    <h2>Información del medicamento</h2>
-                    <p>Nombre: ${data.nombre}</p>
-                    <p>Descripción: ${data.descripcion}</p>
-                    <p>Precio: ${data.precio}</p>
-                `;
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-
-        document.getElementById('categoria').addEventListener('change', function () {
-            const idCategoria = this.value;
-            if (idCategoria) { // Verifica que idCategoria no sea vacío
-                fetch(`http://localhost:8080/categorias/${idCategoria}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const informacion = document.getElementById('informacion');
-                        informacion.innerHTML = `
-                    <h2>Información de la categoría</h2>
-                    <p>Nombre: ${data.nombre}</p>
-                    <p>Descripción: ${data.descripcion}</p>
-                `;
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-    </script>
+    <script src="Script_Update-Medicamento.js"></script>
 
 </body>
 
 </html>
-```
