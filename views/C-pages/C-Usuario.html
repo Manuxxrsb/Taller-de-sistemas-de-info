@@ -9,46 +9,18 @@
 <body>
     <h1 class="title-home">Ingresa un Usuario</h1>
     <form id="myForm" class="title-home">
-        <label for="Nombre">Nombre:</label> <input type="text" id="Nombre" name="Nombre">
-        <label for="Apellido">Apellido:</label> <input type="text" id="Apellido" name="Apellido">
-        <label for="Correo">Correo:</label> <input type="email" id="Correo" name="Correo">
-        <label for="Contrasena">Contraseña:</label> <input type="password" id="Contrasena" name="Contrasena">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="Nombre" name="Nombre">
+        <label for="Apellido">Apellido:</label>
+        <input type="text" id="Apellido" name="Apellido">
+        <label for="Correo">Correo:</label>
+        <input type="email" id="Correo" name="Correo">
+        <label for="Contrasena">Contrasena:</label>
+        <input type="password" id="Contrasena" name="Contrasena">
         <button type="submit" class="title-home">Enviar</button>
     </form>
 
-    <script>
-        const form = document.getElementById('myForm');
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Evita el envío del formulario por defecto
-
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            // Convertir el objeto a JSON
-            const jsonData = JSON.stringify(data);
-            const url = 'http://localhost:8080/usuario'
-            // Enviar la solicitud al backend (ejemplo con Fetch)
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Respuesta del servidor:', data);
-                    notification.textContent = data;
-                    notification.style.display = 'block';
-                    notification.classList.toggle('error', isError);
-
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    </script>
+    <script src="Script_C-Usuario.js"></script>
 
 </body>
 
