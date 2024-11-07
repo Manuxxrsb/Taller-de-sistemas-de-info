@@ -9,30 +9,25 @@ import (
 )
 
 func ActualizarUsuario(db *gorm.DB) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Get the user ID from the request body
-		var usuario models.Usuario
-		if err := c.BindJSON(&usuario); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	return func(Request *gin.Context) {
+		id := Request.Param("id")
+		var Usuario models.Usuario
+		if err := db.First(&Usuario, id).Error; err != nil {
+			Request.JSON(http.StatusNotFound, gin.H{"error": "Usuario no encontrado " + err.Error()})
 			return
 		}
-		// Find the user in the database
-		var user models.Usuario
-		db.First(&user, usuario.Id)
-		if user.Id == 0 {
-			c.JSON(http.StatusNotFound, gin.H{"error": "Usuario no encontrado"})
+
+		var input models.Usuario
+		if err := Request.ShouldBindJSON(&input); err != nil {
+			Request.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		// Update the user in the database
-		err := db.Model(&user).Updates(map[string]interface{}{
-			"nombre":   usuario.Nombre,
-			"apellido": usuario.Apellido,
-			"email":    usuario.Email,
-		}).Error
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+
+		if err := db.Model(&Usuario).Updates(input).Error; err != nil {
+			Request.JSON(http.StatusInternalServerError, gin.H{"error": "Error al actualizar la Usuario en la BD " + err.Error()})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"message": "Usuario actualizado con éxito"})
+
+		Request.JSON(http.StatusOK, Usuario)
 	}
 }
