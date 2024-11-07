@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/estilos.css">
-    <title>Get-Medicamentos</title>
+    <title>Medicamentos</title>
 </head>
 
 <body>
@@ -24,7 +24,8 @@
                 <th>Fechafabric</th>
                 <th>Fechavence</th>
                 <th>Stock</th>
-                <th>Categoria</th>
+                <th>Categoria ID</th>
+                <th>Nombre Categoria</th>
                 <th>Bioequivalente</th>
                 <th>Precio</th>
                 <th>Acciones</th> <!-- Nueva columna para los botones -->
@@ -33,7 +34,7 @@
         <tbody class="Item-Medicamento"></tbody>
     </table>
 
-    <button onclick="prueba()">Obtener Medicamentos</button>
+    <button onclick="GetMedicamentos()">Obtener Medicamentos</button>
 
     <!------------------------------------------------------------------------------>
 
@@ -74,7 +75,8 @@
                 </select>
 
                 <label for="editCategoria">Categoria</label>
-                <select id="editCategoria"></select>
+                <select id="editCategoria" name="editCategoria">
+                </select>
 
                 <label for="editPrecio">Precio</label>
                 <input type="number" id="editPrecio">

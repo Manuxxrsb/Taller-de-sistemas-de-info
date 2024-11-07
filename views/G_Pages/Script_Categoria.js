@@ -8,11 +8,10 @@ function prueba() {
             var texto = []
             for (let i = 0; i < lista.length; i++) {
                 texto = texto + (`<tr>
-                        <td>${lista[i].Id_categoria}</td>
+                        <td>${lista[i].ID}</td>
                         <td>${lista[i].nombre}</td>
-                        <td>${lista[i].descripcion}</td>
-                        
-                    </tr>
+                        <td>${lista[i].descripcion}</td> 
+                        </tr>
                     `)
             }
             p.innerHTML = texto
@@ -23,7 +22,7 @@ function prueba() {
 
 function mostrarMedicamentos(lista) {
     lista.forEach(categoria => {
-        const url = `http://localhost:8080/medbycategoria/${categoria.Id_categoria}`
+        const url = `http://localhost:8080/medbycategoria/${categoria.ID}`
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -31,8 +30,7 @@ function mostrarMedicamentos(lista) {
                 const medicamentosHtml = `
                     <h2>Medicamentos de la categoría ${categoria.nombre}</h2>
                     <ul>
-                        ${data.map(medicamento => `<li>${medicamento.nombre}</li>`).join('')}
-                    </ul>
+                        ${data.map(medicamento => `<li>${medicamento.nombre}</li>`).join('')}</ul>
                 `
                 medicamentosContainer.innerHTML += medicamentosHtml
             })

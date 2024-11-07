@@ -1,62 +1,59 @@
-//actual area de trabajo
-//document.addEventListener('DOMContentLoaded', obtenerCategorias);
+
+//----------------- VARIABLES DE ENTORNO --------------------------------
+let CategoriasList;
+let medicamentosList;
+function GetMedicamentos() {
 
 
-function obtenerCategorias() {
     fetch('http://localhost:8080/categorias')
         .then(response => response.json())
         .then(data => {
-            const categoriasList = Object.values(data);
-            console.log(categoriasList);
-            // Agregar opciones a la lista de categorías en el formulario de edición
-            let p = document.querySelector('select.editCategoria')
-            let texto = ''; // Información que entrega el JSON
-            for (let i = 0; i < categoriasList.length; i++) {
-                texto += `<option value="${categoriasList[i].ID}">${categoriasList[i].Nombre}</option>`;
-            }
-            p.innerHTML = texto;
-
+            // console.log(data)
+            CategoriasList = Object.values(data);
         })
-        .catch(error => console.error('Error:', error));
-}
+        .catch(error => console.error(error));
 
-
-
-//-------------------------------------------------
-
-function prueba() {
-    // Llamar a la API para obtener la lista de medicamentos
     fetch('http://localhost:8080/medicamentos')
         .then(response => response.json()) // Acceder a los datos de la API como JSON
         .then(data => {
             medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
-            displayMedicamentos(medicamentosList); // Funcioin Mostrar medicamentos
+            displayMedicamentos(medicamentosList, CategoriasList); // Funciin Mostrar medicamentos
         })
         .catch(error => console.error(error));
 
+    agregaopcionescategoria(CategoriasList);
 
 }
 
-function displayMedicamentos(lista) {
-    console.log(lista);
+//---------------------------------------------------------------------------
+
+function displayMedicamentos(listaMedicamentos, CategoriasList) {
+    console.log("Medicamentos");
+    console.log(listaMedicamentos);
+    console.log("Categorias");
+    console.log(CategoriasList);
+
     let p = document.querySelector('tbody.Item-Medicamento');
     let texto = ''; // Información que entrega el JSON
-    for (let i = 0; i < lista.length; i++) {
+    for (let i = 0; i < listaMedicamentos.length; i++) {
+        let categoria = CategoriasList.find((categoria) => listaMedicamentos[i]);
+        //console.log(categoria);
         texto += `<tr>
-                        <td>${lista[i].ID}</td>
-                        <td>${lista[i].nombre}</td>
-                        <td>${lista[i].marca}</td>
-                        <td>${lista[i].descripcion}</td>
-                        <td>${lista[i].numerolote}</td>
-                        <td>${lista[i].fechafabric}</td>
-                        <td>${lista[i].fechavence}</td>
-                        <td>${lista[i].stock}</td>
-                        <td>${lista[i].CategoriaID}</td>
-                        <td>${lista[i].bioequivalente}</td> 
-                        <td>${lista[i].precio}</td>	
+                        <td>${listaMedicamentos[i].ID}</td>
+                        <td>${listaMedicamentos[i].nombre}</td>
+                        <td>${listaMedicamentos[i].marca}</td>
+                        <td>${listaMedicamentos[i].descripcion}</td>
+                        <td>${listaMedicamentos[i].numerolote}</td>
+                        <td>${listaMedicamentos[i].fechafabric}</td>
+                        <td>${listaMedicamentos[i].fechavence}</td>
+                        <td>${listaMedicamentos[i].stock}</td>
+                        <td>${listaMedicamentos[i].CategoriaID}</td>
+                        <td>${categoria.nombre}</td>
+                        <td>${listaMedicamentos[i].bioequivalente}</td> 
+                        <td>${listaMedicamentos[i].precio}</td>	
                         <td>
-                            <button onclick="eliminarMedicamento(${lista[i].ID})">Eliminar</button>
-                            <button onclick="editarMedicamento(${lista[i].ID})">Editar</button>
+                            <button onclick="eliminarMedicamento(${listaMedicamentos[i].ID})">Eliminar</button>
+                            <button onclick="editarMedicamento(${listaMedicamentos[i].ID})">Editar</button>
                         </td>
                        </tr>`;
     }
@@ -96,7 +93,7 @@ function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el st
         .then(response => {
             if (response.ok) {
                 alert('Medicamento eliminado con éxito.');
-                prueba(); // Volver a cargar la lista de medicamentos
+                GetMedicamentos(); // Volver a cargar la lista de medicamentos
             } else {
                 alert('Error al eliminar el medicamento.');
             }
@@ -104,9 +101,9 @@ function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el st
         .catch(error => console.error('Error:', error));
 }
 
-
-
+//FUNCION QUE ASIGNA LOS VALORES DE UN MEDICAMENTO A LOS CAMPOS DEL FORMULARIO DE EDICION
 function editarMedicamento(id) {
+
     const medicamento = medicamentosList.find(m => m.ID === id);
     if (medicamento) {
         document.getElementById('editId').value = medicamento.ID;
@@ -132,6 +129,15 @@ function cerrarModal() {
 
 //---------------- FORMULARIO DE EDICION DE MEDICAMENTO -----------------
 
+function agregaopcionescategoria(Categorias) {
+    let p = document.getElementById('editCategoria');
+    let opciones = '';
+    for (let i = 0; i < Categorias.length; i++) {
+        opciones += `<option value="${Categorias[i].ID}">${Categorias[i].nombre}</option>`;
+    }
+    p.innerHTML = opciones;
+}
+
 document.getElementById('editForm').addEventListener('submit', actualizarMedicamento);
 
 function actualizarMedicamento(event) {
@@ -146,7 +152,7 @@ function actualizarMedicamento(event) {
         fechavence: document.getElementById('editFechavence').value,
         stock: document.getElementById('editStock').value,
         bioequivalente: document.getElementById('editBioequivalente').value,
-        categoria: document.getElementById('editCategoria').value,
+        categoria_Id: document.getElementById('editCategoria').value,
         precio: document.getElementById('editPrecio').value,
     };
 
@@ -170,3 +176,6 @@ function actualizarMedicamento(event) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+
+

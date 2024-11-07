@@ -1,4 +1,4 @@
 {
     "editor.formatOnSave": true,
-    "livePreview.defaultPreviewPath": "/views/ClientesPages/VistaPrueba.html"
+    "livePreview.defaultPreviewPath": "/views/C-pages/C-Medicamento.html"
 }
