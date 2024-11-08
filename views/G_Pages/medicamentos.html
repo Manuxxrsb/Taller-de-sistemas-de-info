@@ -25,7 +25,7 @@
                 <th>Fechavence</th>
                 <th>Stock</th>
                 <th>Categoria ID</th>
-                <th>Nombre Categoria</th>
+                <!--<th>Nombre Categoria</th>-->
                 <th>Bioequivalente</th>
                 <th>Precio</th>
                 <th>Acciones</th> <!-- Nueva columna para los botones -->
@@ -34,7 +34,7 @@
         <tbody class="Item-Medicamento"></tbody>
     </table>
 
-    <button onclick="GetMedicamentos()">Obtener Medicamentos</button>
+    <button onclick="GetInformacion()">Obtener Medicamentos</button>
 
     <!------------------------------------------------------------------------------>
 
@@ -45,6 +45,7 @@
             <form id="editForm">
 
                 <input type="hidden" id="editId">
+
 
                 <label for="editNombre">Nombre:</label>
                 <input type="text" id="editNombre">
@@ -75,7 +76,7 @@
                 </select>
 
                 <label for="editCategoria">Categoria</label>
-                <select id="editCategoria" name="editCategoria">
+                <select id="editCategoria">
                 </select>
 
                 <label for="editPrecio">Precio</label>

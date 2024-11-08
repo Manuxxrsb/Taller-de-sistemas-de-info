@@ -2,8 +2,7 @@
 //----------------- VARIABLES DE ENTORNO --------------------------------
 let CategoriasList;
 let medicamentosList;
-function GetMedicamentos() {
-
+function GetInformacion() {
 
     fetch('http://localhost:8080/categorias')
         .then(response => response.json())
@@ -36,7 +35,7 @@ function displayMedicamentos(listaMedicamentos, CategoriasList) {
     let p = document.querySelector('tbody.Item-Medicamento');
     let texto = ''; // Información que entrega el JSON
     for (let i = 0; i < listaMedicamentos.length; i++) {
-        let categoria = CategoriasList.find((categoria) => listaMedicamentos[i]);
+        // let categoria = CategoriasList.find((categoria) => listaMedicamentos[i]); <td>${categoria.nombre}</td>
         //console.log(categoria);
         texto += `<tr>
                         <td>${listaMedicamentos[i].ID}</td>
@@ -48,7 +47,7 @@ function displayMedicamentos(listaMedicamentos, CategoriasList) {
                         <td>${listaMedicamentos[i].fechavence}</td>
                         <td>${listaMedicamentos[i].stock}</td>
                         <td>${listaMedicamentos[i].CategoriaID}</td>
-                        <td>${categoria.nombre}</td>
+                        
                         <td>${listaMedicamentos[i].bioequivalente}</td> 
                         <td>${listaMedicamentos[i].precio}</td>	
                         <td>
@@ -93,7 +92,7 @@ function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el st
         .then(response => {
             if (response.ok) {
                 alert('Medicamento eliminado con éxito.');
-                GetMedicamentos(); // Volver a cargar la lista de medicamentos
+                GetInformacion(); // Volver a cargar la lista de medicamentos
             } else {
                 alert('Error al eliminar el medicamento.');
             }
@@ -143,6 +142,9 @@ document.getElementById('editForm').addEventListener('submit', actualizarMedicam
 function actualizarMedicamento(event) {
     event.preventDefault();
     const id = document.getElementById('editId').value;
+    //console.log("el dato id que recibe el form es:")
+    //console.log(id);
+
     const medicamentoActualizado = {
         nombre: document.getElementById('editNombre').value,
         marca: document.getElementById('editMarca').value,
@@ -152,8 +154,9 @@ function actualizarMedicamento(event) {
         fechavence: document.getElementById('editFechavence').value,
         stock: document.getElementById('editStock').value,
         bioequivalente: document.getElementById('editBioequivalente').value,
-        categoria_Id: document.getElementById('editCategoria').value,
+        categoriaId: parseInt(document.getElementById('editCategoria').value),
         precio: document.getElementById('editPrecio').value,
+        proveedorID: 0,
     };
 
     console.log('Medicamento a actualizar:', medicamentoActualizado); // Agregar este log
@@ -169,13 +172,10 @@ function actualizarMedicamento(event) {
             if (response.ok) {
                 alert('Medicamento actualizado con éxito.');
                 cerrarModal();
-                prueba(); // Recargar la lista de medicamentos
+                GetInformacion(); // Recargar la lista de medicamentos
             } else {
                 alert('Error al actualizar el medicamento.');
             }
         })
         .catch(error => console.error('Error:', error));
 }
-
-
-

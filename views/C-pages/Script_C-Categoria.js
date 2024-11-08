@@ -1,5 +1,28 @@
-function agregarMedicamento() {
 
+let ProveedoresList
+function GetProveedores() {
+
+    fetch('http://localhost:8080/proveedores')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            ProveedoresList = Object.values(data);
+        })
+        .catch(error => console.error(error));
+
+    agregaopcionesProveedor(ProveedoresList)
+}
+
+function agregaopcionesProveedor(Proveedor) {
+    let p = document.getElementById('editProveedor');
+    let opciones = '';
+    for (let i = 0; i < Proveedor.length; i++) {
+        opciones += `<option value="${Proveedor[i].ID}">${Proveedor[i].nombre}</option>`;
+    }
+    p.innerHTML = opciones;
+}
+
+function agregarMedicamento() {
     const contenedor = document.getElementById("medicamentos");
     const nuevoMedicamento = document.createElement("div");
     nuevoMedicamento.innerHTML = `
@@ -10,15 +33,20 @@ function agregarMedicamento() {
         <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
         <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
         <input type="number" name="stock" placeholder="Stock" required>
-        <h3>Bioequivalente</h3>
+        <label for="editBioequivalente">Bioequivalente</label>
         <select id="editBioequivalente">
             <option value="true">Sí</option>
             <option value="false">No</option>
         </select>
+        <label for="editBioequivalente">Proveedor</label>
+        <select id="editProveedor"></select>
+        <button type="button" onclick="GetProveedores()">P</button>
         <input type="number" name="Precio" placeholder="Precio" required>
         <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
     `;
     contenedor.appendChild(nuevoMedicamento);
+
+    agregaopcionesProveedor(ProveedoresList);
 }
 
 function eliminarMedicamento(boton) {
