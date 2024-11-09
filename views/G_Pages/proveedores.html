@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/estilos.css">
+    <title>Proveedores</title>
+</head>
+<body>
+    <table>
+    <thead>
+        <tr>
+            <th>ID Proveedor</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+    <tbody class="Item-Proveedor"></tbody>
+    </table>
+
+    <!--   MODAL DE EDICION -->
+    <div id="editModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>Editar Proveedor </h2>
+            <form id="editForm">
+
+                <input type="hidden" id="editId">
+
+                <label for="editNombre">Nombre:</label>
+                <input type="text" id="editNombre">
+
+            </form>
+        </div>
+
+
+
+
+
+</body>
+
+<script src="Script_Proveedor.js"></script>
+</html>

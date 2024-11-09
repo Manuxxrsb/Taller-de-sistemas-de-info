@@ -1,7 +1,13 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    GetInformacion();
+    console.log("Informacion obtenida")
+});
+
 
 //----------------- VARIABLES DE ENTORNO --------------------------------
 let CategoriasList;
 let medicamentosList;
+
 function GetInformacion() {
 
     fetch('http://localhost:8080/categorias')
@@ -9,19 +15,21 @@ function GetInformacion() {
         .then(data => {
             // console.log(data)
             CategoriasList = Object.values(data);
+            GetMedicamentos();
+            agregaopcionescategoria(CategoriasList);
         })
         .catch(error => console.error(error));
 
+}
+
+function GetMedicamentos(){
     fetch('http://localhost:8080/medicamentos')
-        .then(response => response.json()) // Acceder a los datos de la API como JSON
-        .then(data => {
-            medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
-            displayMedicamentos(medicamentosList, CategoriasList); // Funciin Mostrar medicamentos
-        })
-        .catch(error => console.error(error));
-
-    agregaopcionescategoria(CategoriasList);
-
+    .then(response => response.json()) // Acceder a los datos de la API como JSON
+    .then(data => {
+        medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
+        displayMedicamentos(medicamentosList, CategoriasList); // Funciin Mostrar medicamentos
+    })
+    .catch(error => console.error(error));
 }
 
 //---------------------------------------------------------------------------

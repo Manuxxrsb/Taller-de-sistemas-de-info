@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    prueba();
+    console.log("Proveedores categorias")
+});
+
+
+
 function prueba() {
     const url = 'http://localhost:8080/categorias' // countries api
     fetch(url)
@@ -28,7 +35,7 @@ function mostrarMedicamentos(lista) {
             .then(data => {
                 const medicamentosContainer = document.querySelector('.medicamentos-container')
                 const medicamentosHtml = `
-                    <h2>Medicamentos de la categoría ${categoria.nombre}</h2>
+                    <h2 class="title-home" >Medicamentos de la categoría ${categoria.nombre}</h2>
                     <ul>
                         ${data.map(medicamento => `<li>${medicamento.nombre}</li>`).join('')}</ul>
                 `
