@@ -35,7 +35,7 @@ function nombreUsuario(nombre,email){
     boleta.email = email;
     let p = document.querySelector("div.saludo");
     if (p !== null) {
-        p.innerText = `Bienvenido, ${nombre}`;
+        p.innerHTML = `<h1 class="title-home">Bienvenido, ${nombre}</h1>`;
     } else {
         console.error("Elemento 'div.saludo' no encontrado");
     }
@@ -84,6 +84,7 @@ function Imprimir(){
     boleta.Medicamentos.forEach(medicamento => {
         infoBoleta += `\n- ${medicamento.nombre} (Cantidad: ${medicamento.stock})`;
     });
+
     alert(infoBoleta);
     console.log(infoBoleta);
 
