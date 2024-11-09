@@ -34,7 +34,7 @@ function Proveedores(){
             <td>${ProveedoresList[i].telefono}</td>
             <td>${ProveedoresList[i].email}</td>
                 <td>
-                <button onclick="editarProveedor(${ProveedoresList[i].ID})>Editar</button>"
+                <button onclick="editarProveedor(${ProveedoresList[i].ID})"> Editar </button>
                 </td>
         </tr>
         `;

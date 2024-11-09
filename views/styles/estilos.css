@@ -37,13 +37,32 @@ body {
 }
 
 .title-home {
-    color: #bdbddd;
     padding-top: 10px;
     text-shadow:
         -1px -1px 0px black,
         1px -1px 0px black,
         -1px 1px 0px black,
         1px 1px 0px black;
+    
+        background-image: linear-gradient(to bottom, rgba(70, 130, 180, 0.7), rgba(70, 130, 180, 0.3));
+        border-width: 2px;
+        width: auto;
+        height: auto;
+        justify-content: space-between;
+        align-items: center;
+        
+}
+
+.title-home-index{
+    color:#e1e1e1;
+    padding-top: 10px;
+    text-shadow:
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black,
+        1px 1px 0px black;
+
+    
 }
 
 .title-home-h {
@@ -67,11 +86,24 @@ body {
     align-items: center;
 }
 
-.func-li {
-    background-color: #add8e6;
+.func-index{
+    background-image: linear-gradient(to bottom, rgba(70, 130, 180, 0.7), rgba(70, 130, 180, 0.3));
     border-width: 2px;
-    border-style: solid;
-    border-color: #00008b;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.func-li {
+    background-image: linear-gradient(to bottom, rgba(70, 130, 180, 0.7), rgba(70, 130, 180, 0.3));
+    border-width: 2px;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .func-li:hover {
