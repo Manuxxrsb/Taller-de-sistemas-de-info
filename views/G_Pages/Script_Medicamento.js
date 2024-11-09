@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     GetInformacion();
-    console.log("Informacion obtenida")
 });
-
 
 //----------------- VARIABLES DE ENTORNO --------------------------------
 let CategoriasList;
@@ -27,24 +25,18 @@ function GetMedicamentos(){
     .then(response => response.json()) // Acceder a los datos de la API como JSON
     .then(data => {
         medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
-        displayMedicamentos(medicamentosList, CategoriasList); // Funciin Mostrar medicamentos
+        displayMedicamentos(medicamentosList); // Funciin Mostrar medicamentos
     })
     .catch(error => console.error(error));
 }
 
 //---------------------------------------------------------------------------
 
-function displayMedicamentos(listaMedicamentos, CategoriasList) {
-    console.log("Medicamentos");
-    console.log(listaMedicamentos);
-    console.log("Categorias");
-    console.log(CategoriasList);
+function displayMedicamentos(listaMedicamentos) {
 
     let p = document.querySelector('tbody.Item-Medicamento');
     let texto = ''; // Información que entrega el JSON
     for (let i = 0; i < listaMedicamentos.length; i++) {
-        // let categoria = CategoriasList.find((categoria) => listaMedicamentos[i]); <td>${categoria.nombre}</td>
-        //console.log(categoria);
         texto += `<tr>
                         <td>${listaMedicamentos[i].ID}</td>
                         <td>${listaMedicamentos[i].nombre}</td>
@@ -66,7 +58,6 @@ function displayMedicamentos(listaMedicamentos, CategoriasList) {
     }
     p.innerHTML = texto;
 }
-
 
 //----- Funcion para Filtrar medicamentos-------------------
 function filterMedicamentos() {
@@ -90,9 +81,7 @@ function filterMedicamentos() {
 
     displayMedicamentos(filteredMedicamentos); // Mostrar los medicamentos filtrados
 }
-
 //---------- BOTONES -----
-
 function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
     fetch(`http://localhost:8080/medicamentos/${id}`, {
         method: 'DELETE'
@@ -133,7 +122,6 @@ function cerrarModal() {
     document.getElementById('editModal').style.display = 'none';
 }
 
-
 //---------------- FORMULARIO DE EDICION DE MEDICAMENTO -----------------
 
 function agregaopcionescategoria(Categorias) {
@@ -150,9 +138,6 @@ document.getElementById('editForm').addEventListener('submit', actualizarMedicam
 function actualizarMedicamento(event) {
     event.preventDefault();
     const id = document.getElementById('editId').value;
-    //console.log("el dato id que recibe el form es:")
-    //console.log(id);
-
     const medicamentoActualizado = {
         nombre: document.getElementById('editNombre').value,
         marca: document.getElementById('editMarca').value,
@@ -167,8 +152,6 @@ function actualizarMedicamento(event) {
         proveedorID: 0,
     };
 
-    console.log('Medicamento a actualizar:', medicamentoActualizado); // Agregar este log
-
     fetch(`http://localhost:8080/medicamentos/${id}`, {
         method: 'PUT',
         headers: {
@@ -180,7 +163,7 @@ function actualizarMedicamento(event) {
             if (response.ok) {
                 alert('Medicamento actualizado con éxito.');
                 cerrarModal();
-                GetInformacion(); // Recargar la lista de medicamentos
+                GetInformacion();
             } else {
                 alert('Error al actualizar el medicamento.');
             }

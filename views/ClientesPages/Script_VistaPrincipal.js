@@ -7,10 +7,7 @@ const boleta = {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     ObtenerMedicamentos();
-    console.log("Medicamento obtenidos")
-    console.log(document.cookie);
     let galleta = document.cookie.split(",");
-    console.log(galleta);
     nombreUsuario(galleta[1],galleta[2]);
 });
 
@@ -84,14 +81,9 @@ function Imprimir(){
     boleta.Medicamentos.forEach(medicamento => {
         infoBoleta += `\n- ${medicamento.nombre} (Cantidad: ${medicamento.stock})`;
     });
-
-    alert(infoBoleta);
-    console.log(infoBoleta);
-
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
     doc.text( `${infoBoleta}` , 25 ,25);
     doc.save("documento.pdf");
-    
 }
