@@ -2,10 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     GetProveedores();
 });
 
-
-
 let ProveedoresList
-
 
 function GetProveedores() {
 
@@ -42,12 +39,11 @@ function agregarMedicamento() {
         <input type="number" name="stock" placeholder="Stock" required>
         <label for="editBioequivalente">Bioequivalente</label>
         <select id="editBioequivalente">
-            <option value="true">Sí</option>
-            <option value="false">No</option>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
         </select>
         <label for="editBioequivalente">Proveedor</label>
         <select id="editProveedor"></select>
-        <button type="button" onclick="GetProveedores()">P</button>
         <input type="number" name="Precio" placeholder="Precio" required>
         <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
     `;
@@ -82,9 +78,10 @@ function enviarFormulario(event) {
         const fechavence = medicamento.querySelector('input[name="fechavence"]').value;
         const stock = medicamento.querySelector('input[name="stock"]').value;
         const bioequivalente = medicamento.querySelector('select[id="editBioequivalente"]').value;
+        const proveedorID = parseInt(medicamento.querySelector('select[id="editProveedor"]').value);
         const precio = medicamento.querySelector('input[name="Precio"]').value;
 
-        categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock, bioequivalente, precio });
+        categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock, bioequivalente, proveedorID, precio });
     });
 
     // Enviar datos al backend
