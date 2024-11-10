@@ -34,3 +34,53 @@ function Proveedores(){
 
     p.innerHTML = texto;
 }
+
+function editarProveedor(id){
+    console.log(id);
+    let proveedor = ProveedoresList.find(proveedor => proveedor.ID === id);
+    document.getElementById('editId').value = proveedor.ID
+    if(proveedor){
+        document.getElementById('editNombre').value = proveedor.nombre;
+        document.getElementById('editTelefono').value = proveedor.telefono;
+        document.getElementById('editCorreo').value = proveedor.email;
+        document.getElementById('editModal').style.display = 'block';
+    }
+}
+
+function Actualizar(){
+    const id = document.getElementById('editId').value;
+    console.log("id a ctualizar");
+    console.log(id);
+
+    const ProveedorActualizado = {
+        nombre: document.getElementById('editNombre').value,
+        telefono: document.getElementById('editTelefono').value,
+        email: document.getElementById('editCorreo').value,
+    };
+
+    console.log(ProveedorActualizado);
+
+    fetch(`http://localhost:8080/proveedor/${id}`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ProveedorActualizado),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error en la actualización: ${response.status} ${response.statusText}`);
+        }
+        response.json();
+    })
+    .then(data => {
+        console.log('Proveedor actualizado con éxito:', data);
+        // Aquí puedes cerrar el modal o actualizar la lista de proveedores si es necesario
+        document.getElementById('editModal').style.display = 'none';
+        GetProveedores(); // Para refrescar la lista de proveedores
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('No se pudo actualizar el proveedor. Verifica los datos e intenta nuevamente.');
+    });
+}
