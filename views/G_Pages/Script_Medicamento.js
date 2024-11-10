@@ -60,7 +60,7 @@ function displayMedicamentos(listaMedicamentos) {
                         <td>${listaMedicamentos[i].fechafabric}</td>
                         <td>${listaMedicamentos[i].fechavence}</td>
                         <td>${listaMedicamentos[i].stock}</td>
-                        <td>${listaMedicamentos[i].CategoriaID}</td>
+                        <td>${listaMedicamentos[i].categoria_id}</td>
                         <td>${listaMedicamentos[i].ProveedorID}</td>
                         <td>${listaMedicamentos[i].bioequivalente}</td> 
                         <td>${listaMedicamentos[i].precio}</td>	
