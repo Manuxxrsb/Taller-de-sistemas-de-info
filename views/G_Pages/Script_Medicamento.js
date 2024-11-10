@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //----------------- VARIABLES DE ENTORNO --------------------------------
 let CategoriasList;
 let medicamentosList;
+let Listadeproveedores;
 
 function GetInformacion() {
 
@@ -25,9 +26,21 @@ function GetMedicamentos(){
     .then(response => response.json()) // Acceder a los datos de la API como JSON
     .then(data => {
         medicamentosList = Object.values(data); // Guardar la lista de medicamentos en medicamentosList
-        displayMedicamentos(medicamentosList); // Funciin Mostrar medicamentos
+        console.log(medicamentosList);
+        ObtenerProveedores();
     })
     .catch(error => console.error(error));
+}
+
+function ObtenerProveedores(){
+    fetch('http://localhost:8080/proveedores')
+    .then(response => response.json())    
+    .then(data =>{
+        Listadeproveedores = Object.values(data);
+        console.log(Listadeproveedores);
+        displayMedicamentos(medicamentosList);
+    })
+    .catch(error => console.log(error));
 }
 
 //---------------------------------------------------------------------------
@@ -37,7 +50,8 @@ function displayMedicamentos(listaMedicamentos) {
     let p = document.querySelector('tbody.Item-Medicamento');
     let texto = ''; // Información que entrega el JSON
     for (let i = 0; i < listaMedicamentos.length; i++) {
-        texto += `<tr>
+    //console.log(proveedor);
+        texto += `<tr class="Item-Medicamento">
                         <td>${listaMedicamentos[i].ID}</td>
                         <td>${listaMedicamentos[i].nombre}</td>
                         <td>${listaMedicamentos[i].marca}</td>
@@ -47,16 +61,18 @@ function displayMedicamentos(listaMedicamentos) {
                         <td>${listaMedicamentos[i].fechavence}</td>
                         <td>${listaMedicamentos[i].stock}</td>
                         <td>${listaMedicamentos[i].CategoriaID}</td>
-                        
+                        <td>${listaMedicamentos[i].ProveedorID}</td>
                         <td>${listaMedicamentos[i].bioequivalente}</td> 
                         <td>${listaMedicamentos[i].precio}</td>	
                         <td>
                             <button onclick="eliminarMedicamento(${listaMedicamentos[i].ID})">Eliminar</button>
                             <button onclick="editarMedicamento(${listaMedicamentos[i].ID})">Editar</button>
                         </td>
-                       </tr>`;
+                </tr>`;
     }
     p.innerHTML = texto;
+
+    agregaopcionesProveedor(Listadeproveedores);
 }
 
 //----- Funcion para Filtrar medicamentos-------------------
@@ -74,6 +90,7 @@ function filterMedicamentos() {
             medicamento.stock.toString().includes(filter) ||
             medicamento.CategoriaID.toString().includes(filter) ||
             medicamento.bioequivalente.toString().includes(filter) ||
+            medicamento.ProveedorID.toString().includes(filter) ||
             medicamento.precio.toString().includes(filter)
 
         );
@@ -112,6 +129,7 @@ function editarMedicamento(id) {
         document.getElementById('editStock').value = medicamento.stock;
         document.getElementById('editPrecio').value = medicamento.precio;
         document.getElementById('editCategoria').value = medicamento.categoria_id; // Asegúrate de que esto funcione
+        document.getElementById('editProveedor').value = medicamento.ProveedorID;
         document.getElementById('editModal').style.display = 'block';
     }
 }
@@ -133,6 +151,15 @@ function agregaopcionescategoria(Categorias) {
     p.innerHTML = opciones;
 }
 
+function agregaopcionesProveedor(proveedores){
+    let p= document.getElementById('editProveedor');
+    let opciones = '';
+    for(let i=0; i < proveedores.length; i++){
+        opciones += `<option value="${proveedores[i].ID}">${proveedores[i].nombre}</option>`
+    }
+    p.innerHTML = opciones;
+}
+
 document.getElementById('editForm').addEventListener('submit', actualizarMedicamento);
 
 function actualizarMedicamento(event) {
@@ -149,8 +176,10 @@ function actualizarMedicamento(event) {
         bioequivalente: document.getElementById('editBioequivalente').value,
         categoriaId: parseInt(document.getElementById('editCategoria').value),
         precio: document.getElementById('editPrecio').value,
-        proveedorID: 0,
+        proveedorID: parseInt(document.getElementById('editProveedor').value),
     };
+
+    console.log(medicamentoActualizado);
 
     fetch(`http://localhost:8080/medicamentos/${id}`, {
         method: 'PUT',

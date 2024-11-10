@@ -1,5 +1,12 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    GetProveedores();
+});
+
+
 
 let ProveedoresList
+
+
 function GetProveedores() {
 
     fetch('http://localhost:8080/proveedores')
@@ -9,8 +16,6 @@ function GetProveedores() {
             ProveedoresList = Object.values(data);
         })
         .catch(error => console.error(error));
-
-    agregaopcionesProveedor(ProveedoresList)
 }
 
 function agregaopcionesProveedor(Proveedor) {
@@ -21,6 +26,8 @@ function agregaopcionesProveedor(Proveedor) {
     }
     p.innerHTML = opciones;
 }
+
+//------- BOTONES ----------//
 
 function agregarMedicamento() {
     const contenedor = document.getElementById("medicamentos");
@@ -45,7 +52,6 @@ function agregarMedicamento() {
         <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
     `;
     contenedor.appendChild(nuevoMedicamento);
-
     agregaopcionesProveedor(ProveedoresList);
 }
 
@@ -53,6 +59,8 @@ function eliminarMedicamento(boton) {
     const contenedor = boton.parentNode;
     contenedor.parentNode.removeChild(contenedor);
 }
+
+//------------------------------------------
 
 function enviarFormulario(event) {
     event.preventDefault();
