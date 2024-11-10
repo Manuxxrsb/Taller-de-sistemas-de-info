@@ -16,9 +16,12 @@ function Adquirir(ID){
     fetch(`http://localhost:8080/medicamento/${ID}`)
     .then(data => data.json())
     .then(data => {
-
         let medicamento = data;
-        let valor = prompt("Ingrese la cantidad que llevaras");
+        let valor = prompt(`Ingrese la cantidad que llevaras (stock actual: ${medicamento.stock}) ` );
+        if(valor > medicamento.stock){
+            alert(`Por favor ingresa un valor Valido menor o igual que ${medicamento.stock}`);
+            Adquirir(ID);
+        }
         medicamento.stock = valor;
         boleta.Medicamentos.push(medicamento);
     })
@@ -65,15 +68,12 @@ fetch('http://localhost:8080/medicamentos')
 .catch(error => console.error(error));
 }
 
-
-
 function Carrito(){
     let infoBoleta = `Usuario: ${boleta.Usuario}\nEmail: ${boleta.email}\nMedicamentos: `;
     boleta.Medicamentos.forEach(medicamento => {
         infoBoleta += `\n- ${medicamento.nombre} (Cantidad: ${medicamento.stock})`;
     });
     alert(infoBoleta);
-
 }
 
 function Imprimir(){
@@ -83,7 +83,6 @@ function Imprimir(){
     });
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-
     doc.text( `${infoBoleta}` , 25 ,25);
     doc.save("documento.pdf");
 }
