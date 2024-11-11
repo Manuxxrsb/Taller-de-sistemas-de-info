@@ -55,13 +55,41 @@ body {
         1px 1px 0px black;
 }
 
+header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-left: 0;
+    margin-right: 40%;
+}
+
+
+button.logout {
+    width: 100%;
+    padding: 10px;
+    background-color: #87ceeb;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}
+
+button.logout:hover {
+    background-color: #4682b4;
+}
+
+button.logout:active {
+    transform: translateY(2px);
+}
+
+
 .func {
     background-color: #4682b4;
     border-width: 2px;
-    border-style: solid;
-    border-color: #00008b;
-    width: auto;
-    height: auto;
+    width: 10 rem;
+    height: 10 rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,8 +98,6 @@ body {
 .func-li {
     background-color: #add8e6;
     border-width: 2px;
-    border-style: solid;
-    border-color: #00008b;
 }
 
 .func-li:hover {
@@ -145,9 +171,6 @@ li {
     margin: 5px;
 }
 
-header {
-    border-radius: 10px;
-}
 
 form {
     width: 300px;
