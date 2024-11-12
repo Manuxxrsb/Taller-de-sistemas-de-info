@@ -1,48 +1,56 @@
 
 const boleta = {
-    Usuario : "",
+    Usuario: "",
     email: "",
-    Medicamentos:[]
+    Medicamentos: []
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
     ObtenerMedicamentos();
     let galleta = document.cookie.split(",");
-    nombreUsuario(galleta[1],galleta[2]);
+    nombreUsuario(galleta[1], galleta[2]);
 });
 
 
-function Adquirir(ID){
+function Adquirir(ID) {
     fetch(`http://localhost:8080/medicamento/${ID}`)
-    .then(data => data.json())
-    .then(data => {
-        let medicamento = data;
-        let valor = prompt(`Ingrese la cantidad que llevaras (stock actual: ${medicamento.stock}) ` );
-        console.log("valor del promp");
-        console.log(valor);
+        .then(data => data.json())
+        .then(data => {
+            let medicamento = data;
+            let valor = prompt(`Ingrese la cantidad que llevaras (stock actual: ${medicamento.stock}) `);
+            console.log("valor del promp");
+            /**
+            var tipo = typeof (valor);
+            
+             */
+            console.log(valor);
+            console.log(typeof valor);
+            let variable = parseInt(valor);
+            console.log(typeof variable);
 
-        if(valor > medicamento.stock || valor == 0 || valor === null || valor.trim() === "" || contieneCaracteresEspeciales(valor) != false){
-            alert(`Por favor ingresa un valor Valido menor o igual que ${medicamento.stock}`);
-            Adquirir(ID);
-        }else{
-            let precio = medicamento.precio;
-            medicamento.stock = valor;
-            medicamento.precio = (precio * valor);
-            boleta.Medicamentos.push(medicamento);
-            alert("Medicamento agregado correctamente");
-        }
-    })
-    .catch(error => console.log(error));  
+            if (variable > medicamento.stock || !isdigit(valor)) {
+                alert(`Por favor ingresa un valor Valido menor o igual que ${medicamento.stock}`);
+            } else {
+                let precio = medicamento.precio;
+                medicamento.stock = valor;
+                medicamento.precio = (precio * valor);
+                boleta.Medicamentos.push(medicamento);
+                alert("Medicamento agregado correctamente");
+            }
+        })
+        .catch(error => console.log(error));
     console.log("Boleta actualizada");
     console.log(boleta);
 }
 
-function contieneCaracteresEspeciales(valor) {
-    const regex = /[!@#$%^&*(),.?":{};_=+/'¿°|<>-]/;
+
+function isdigit(valor) {
+    const regex = /^\d+$/;
     return regex.test(valor);
 }
 
-function nombreUsuario(nombre,email){
+
+function nombreUsuario(nombre, email) {
     boleta.Usuario = nombre;
     boleta.email = email;
     let p = document.querySelector("div.saludo");
@@ -53,19 +61,19 @@ function nombreUsuario(nombre,email){
     }
 }
 
-function ObtenerMedicamentos(){
+function ObtenerMedicamentos() {
     fetch('http://localhost:8080/medicamentos')
-    .then(response => response.json())
-    .then(data => {
-        const medicamentosContainer = document.getElementById('medicamentos');
-        const row = document.createElement('div');
-        row.classList.add('row');
-        medicamentosContainer.appendChild(row);
-    data.forEach(medicamento => {
-        if(medicamento.stock >0){
-            const card = document.createElement('div');
-            card.classList.add('card', 'col-md-3');
-            card.innerHTML = `
+        .then(response => response.json())
+        .then(data => {
+            const medicamentosContainer = document.getElementById('medicamentos');
+            const row = document.createElement('div');
+            row.classList.add('row');
+            medicamentosContainer.appendChild(row);
+            data.forEach(medicamento => {
+                if (medicamento.stock > 0) {
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'col-md-3');
+                    card.innerHTML = `
                 <img class="card-img-top" src="/views/ClientesPages/img/medicamento.png" alt="${medicamento.nombre}">
                 <div class="card-body">
                     <h2 class="card-title">${medicamento.nombre}</h5>
@@ -74,14 +82,14 @@ function ObtenerMedicamentos(){
                     <button class="btn btn-primary" onclick="Adquirir(${medicamento.ID})">Adquirir</button>
                 </div>
             `;
-            row.appendChild(card);
-        }
-    });
-    })
-    .catch(error => console.error(error));
+                    row.appendChild(card);
+                }
+            });
+        })
+        .catch(error => console.error(error));
 }
 
-function Carrito(){
+function Carrito() {
     let infoBoleta = `|||   Carrito de Compra   ||| \n\n Usuario: ${boleta.Usuario}\n Email: ${boleta.email}\n Medicamentos | [Cantidad] | $ Precio`;
     let Subtotal = 0;
 
@@ -93,7 +101,7 @@ function Carrito(){
     alert(infoBoleta);
 }
 
-function Imprimir(){
+function Imprimir() {
     let infoBoleta = `|||   Farmacias La Estrella   ||| \n||    BOLETA  ||\n\nUsuario: ${boleta.Usuario}\nEmail: ${boleta.email}\nMedicamentos | [ Cantidad ] | $ Valor`;
     let Subtotal = 0;
     boleta.Medicamentos.forEach(medicamento => {
@@ -103,6 +111,6 @@ function Imprimir(){
     infoBoleta += `\n\nSubtotal: $${Subtotal}`;
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.text( `${infoBoleta}` , 25 ,25);
+    doc.text(`${infoBoleta}`, 25, 25);
     doc.save("documento.pdf");
 }
