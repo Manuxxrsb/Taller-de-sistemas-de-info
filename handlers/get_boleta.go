@@ -18,7 +18,7 @@ func GetBoleta(db *gorm.DB) gin.HandlerFunc {
 		}
 
 		//Asociaciones
-		db.Model(&Boleta).Association("Medicamentos").Find(&Boleta.Medicamento)
+		db.Model(&Boleta).Association("Medicamento").Find(&Boleta.Medicamento)
 
 		informacion.JSON(http.StatusOK, Boleta)
 	}

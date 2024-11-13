@@ -26,6 +26,7 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.POST("/medica", handlers.CreateMedicamento(db))
 	router.POST("/usuario", handlers.CreateUsuario(db))
 	router.POST("/proveedor", handlers.CreateProveedor(db))
+	router.POST("/Boleta", handlers.CreateBoleta(db))
 
 	//gets          agregar el preload a las tablas cuando se agreguen las fk
 	router.GET("/categoria/:id_categoria", handlers.GetCategoria(db))
@@ -37,6 +38,7 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.GET("/proveedores", handlers.GetallProveedores(db))
 	router.GET("/medbycategoria/:Id_categoria", handlers.GetMedicamentosByCategoria(db))
 	router.GET("/medBioequivalentes", handlers.GetBioequivalentes(db))
+	//router.GET("/Boletas",)
 
 	//delete
 	router.DELETE("/medicamentos/:id", handlers.DeleteMedicamento(db))
