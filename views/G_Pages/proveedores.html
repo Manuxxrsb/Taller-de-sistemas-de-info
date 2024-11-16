@@ -22,9 +22,11 @@
     <thead>
         <tr>
             <th>ID Proveedor</th>
+            <th>RUT</th>
             <th>Nombre</th>
             <th>Telefono</th>
             <th>Correo</th>
+            <th>Dirección</th>
             <th>Funciones</th>
         </tr>
     </thead>
@@ -39,6 +41,9 @@
 
                 <input type="hidden" id="editId">
 
+                <label for="editRut">RUT:</label>
+                <input type="text" id="editRut">
+
                 <label for="editNombre">Nombre:</label>
                 <input type="text" id="editNombre">
 
@@ -47,6 +52,9 @@
 
                 <label for="editCorreo">Correo</label>
                 <input type="text" id="editCorreo">
+
+                <label for="editDireccion">Dirección:</label>
+                <input type="text" id="editDireccion">
 
                 <button type="button"   onclick="Actualizar()">Actualizar</button>
             </form>

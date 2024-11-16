@@ -10,23 +10,30 @@
 
 <body>
     <nav class="navbar">
-        <div class="logo">Farmacias La Estrella</div>
+        <div class="logo">
+            <img src="../ClientesPages/img/logo-Photoroom.png" alt="Logo Farmacias La Estrella" style="height: 40px; margin-right: 10px;">
+            <span class="farmacia-nombre">Farmacias La Estrella</span>
+        </div>
         <ul class="nav-links">
-            <li class="nav-button"><a href="../index.html">Inicio</a></li>
-            <li class="nav-button"><a href="../login.html">Log out</a></li>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../login.html">Log out</a></li>
         </ul>
     </nav>
     
     <h1>Agregar Proveedor</h1>
-    <form>
+    <form onsubmit="event.preventDefault();">
+        <label for="editRut">RUT Proveedor:</label>
+        <input type="text" id="editRut" placeholder="RUT del Proveedor" required>
         <label for="editNombre">Nombre Proveedor:</label>
         <input type="text" id="editNombre" placeholder="Nombre del Proveedor" required>
         <label for="editTelefono">Telefono:</label>
         <input type="text" id="editTelefono" placeholder="Teléfono" required>
         <label for="editMail">Email:</label>
         <input type="email" id="editMail" placeholder="Correo Electrónico" required>
+        <label for="editDireccion">Dirección:</label>
+        <input type="text" id="editDireccion" placeholder="Dirección" required>
 
-        <button onclick="enviarFormulario()">Guardar</button>
+        <button type="button" onclick="enviarFormulario()">Guardar</button>
     </form>
 
     <script src="Script_C-Proveedor.js"></script>

@@ -1,4 +1,3 @@
-
 const boleta = {
     Usuario: "",
     email: "",
@@ -68,20 +67,26 @@ function ObtenerMedicamentos() {
             const medicamentosContainer = document.getElementById('medicamentos');
             const row = document.createElement('div');
             row.classList.add('row');
+            row.style.display = 'flex';
+            row.style.flexWrap = 'wrap';
+            row.style.justifyContent = 'flex-start'; // Alinear hacia la derecha
             medicamentosContainer.appendChild(row);
-            data.forEach(medicamento => {
+            data.forEach((medicamento, index) => {
                 if (medicamento.stock > 0) {
                     const card = document.createElement('div');
-                    card.classList.add('card', 'col-md-3');
+                    card.classList.add('card');
+                    card.style.flex = '1 1 calc(25% - 20px)';
+                    card.style.margin = '10px';
                     card.innerHTML = `
-                <img class="card-img-top" src="/views/ClientesPages/img/medicamento.png" alt="${medicamento.nombre}">
-                <div class="card-body">
-                    <h2 class="card-title">${medicamento.nombre}</h5>
-                    <h6 class="card-text">${medicamento.marca}</h6>
-                    <h6>${medicamento.descripcion}</h6> <h5> $${medicamento.precio}</h5>
-                    <button class="btn btn-primary" onclick="Adquirir(${medicamento.ID})">Adquirir</button>
-                </div>
-            `;
+                        <img class="card-img-top" src="/views/ClientesPages/img/medicamento.png" alt="${medicamento.nombre}">
+                        <div class="card-body">
+                            <h2 class="card-title">${medicamento.nombre}</h2>
+                            <h6 class="card-text">${medicamento.marca}</h6>
+                            <h6>${medicamento.descripcion}</h6>
+                            <h5>$${medicamento.precio}</h5>
+                            <button class="btn btn-primary" onclick="Adquirir(${medicamento.ID})">Adquirir</button>
+                        </div>
+                    `;
                     row.appendChild(card);
                 }
             });
@@ -105,7 +110,7 @@ function Imprimir() {
     let infoBoleta = `|||   Farmacias La Estrella   ||| \n||    BOLETA  ||\n\nUsuario: ${boleta.Usuario}\nEmail: ${boleta.email}\nMedicamentos | [ Cantidad ] | $ Valor`;
     let Subtotal = 0;
     boleta.Medicamentos.forEach(medicamento => {
-        infoBoleta += `\n- ${medicamento.nombre} \t [${medicamento.stock}] \t $${medicamento.precio}`;
+        infoBoleta += `\n- ${medicamento.nombre}\t|\t [${medicamento.stock}]\t |\t $${medicamento.precio}`;
         Subtotal += medicamento.precio;
     });
     infoBoleta += `\n\nSubtotal: $${Subtotal}`;
@@ -113,4 +118,8 @@ function Imprimir() {
     const doc = new jsPDF();
     doc.text(`${infoBoleta}`, 25, 25);
     doc.save("documento.pdf");
+}
+
+function logout() {
+    window.location.href = '../login.html';
 }

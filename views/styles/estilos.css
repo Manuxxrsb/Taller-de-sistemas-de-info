@@ -59,9 +59,16 @@ button:hover {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.farmacia-nombre {
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
+    margin: 0 auto;
 }
 
 .nav-links {
@@ -153,4 +160,58 @@ section#inicio {
     box-shadow: 0 4px 15px rgba(6, 167, 125, 0.2);
     transform: translateY(-2px);
     transition: all 0.3s ease;
+}
+
+/* Estilos para el formulario de usuario */
+#myForm {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #06a77d;
+}
+
+#myForm label {
+    display: block;
+    margin-bottom: 8px;
+    color: #052f5f;
+    font-weight: bold;
+}
+
+#myForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#myForm input:focus {
+    border-color: #06a77d;
+    outline: none;
+    box-shadow: 0 0 5px rgba(6, 167, 125, 0.2);
+}
+
+#myForm button {
+    width: 100%;
+    padding: 12px;
+    background-color: #06a77d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#myForm button:hover {
+    background-color: #005377;
+}
+
+.title-home {
+    color: #052f5f;
+    margin-bottom: 20px;
 }

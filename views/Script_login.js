@@ -13,7 +13,7 @@ function GetUsuarios(){
 }
 
 function Registrar(){
-    window.open('/views/C-pages/C-Usuario.html','_blank');
+    window.open('c-user.html','_blank');
 }
 
 function IsUser(email , password ,usuarios){
