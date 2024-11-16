@@ -81,6 +81,8 @@ function Actualizar(){
     })
     .then(data => {
         console.log('Proveedor actualizado con éxito:', data);
+        alert('Proveedor actualizado con éxito.');
+        document.querySelector('.edit-section').style.display = 'none'; // Ocultar el formulario de ed
         GetProveedores(); // Para refrescar la lista de proveedores
     })
     .catch(error => {
