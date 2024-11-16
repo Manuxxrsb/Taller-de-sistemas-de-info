@@ -4,6 +4,9 @@ body {
     background: linear-gradient(to bottom, #fff, #f8f8f8);
     width: auto;
     height: auto;
+    padding-top: 80px; /* Agregar padding para compensar el navbar fijo */
+    margin: 0;
+    min-height: 100vh;
 }
 
 .funcionalidades {
@@ -103,13 +106,14 @@ button.logout:active {
 }
 
 .table-container {
-    max-width: 600px;
+    max-width: 90%;
     margin: 20px auto;
     padding: 15px;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     background-color: #ffffff;
     border: 2px solid #005377;
+    overflow-x: auto; /* Para tablas responsivas */
 }
 
 table {
@@ -119,6 +123,7 @@ table {
     font-family: Arial, sans-serif;
     border-radius: 15px;
     overflow: hidden;
+    min-width: 800px; /* Ancho mínimo para evitar que se comprima demasiado */
 }
 
 th,
@@ -186,6 +191,8 @@ form {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    max-width: 500px;
+    width: 100%;
 }
 
 .title-home {
@@ -236,9 +243,13 @@ button:hover {
     background-color: #052f5f;
     padding: 1rem;
     display: flex;
-    justify-content: space-between; /* Cambiado de justify-content: right */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .logo {
@@ -272,5 +283,53 @@ button:hover {
     cursor: pointer;
     padding: 10px 20px;
     margin-top: 10px;
+}
+
+/* Estilos para el modal */
+.modal, .modal-content {
+    display: none;
+}
+
+#editForm {
+    margin: 20px 0;
+    width: 100%;
+    padding: 20px; /* Ajusta el padding */
+    border: 1px solid #005377;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.edit-section {
+    max-width: 600px; /* Ajusta el ancho máximo */
+    margin: 40px auto;
+    padding: 20px; /* Ajusta el padding */
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 2px solid #005377;
+    overflow: hidden; /* Asegura que el contenido se ajuste */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.edit-section h2 {
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Ajustes para inputs y botones dentro de edit-section */
+.edit-section input[type="text"],
+.edit-section input[type="email"],
+.edit-section input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.edit-section button {
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    display: block; /* Centra el botón */
 }
 

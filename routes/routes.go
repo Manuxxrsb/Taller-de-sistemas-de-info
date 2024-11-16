@@ -50,6 +50,7 @@ func ConfiguraRutas(router *gin.Engine) {
 	router.PUT("/medicamentos/:id", handlers.ActualizarMedicamento(db))
 	router.PUT("/usuario/:id", handlers.ActualizarUsuario(db))
 	router.PUT("/proveedor/:id", handlers.ActualizarProveedor(db))
+	router.PUT("/categoria/:id", handlers.ActualizarCategoria(db))
 
 	//Login
 	router.POST("/login")

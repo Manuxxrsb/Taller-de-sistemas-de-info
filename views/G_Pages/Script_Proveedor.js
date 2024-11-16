@@ -38,16 +38,16 @@ function Proveedores(){
 }
 
 function editarProveedor(id){
-    console.log(id);
     let proveedor = ProveedoresList.find(proveedor => proveedor.ID === id);
-    document.getElementById('editId').value = proveedor.ID
+    document.getElementById('editId').value = proveedor.ID;
     if(proveedor){
         document.getElementById('editRut').value = proveedor.rut;
         document.getElementById('editNombre').value = proveedor.nombre;
         document.getElementById('editTelefono').value = proveedor.telefono;
         document.getElementById('editCorreo').value = proveedor.email;
         document.getElementById('editDireccion').value = proveedor.direccion;
-        document.getElementById('editModal').style.display = 'block';
+        document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+        document.querySelector('.edit-section').style.display = 'block'; // Cambiar display a block
     }
 }
 
@@ -81,8 +81,6 @@ function Actualizar(){
     })
     .then(data => {
         console.log('Proveedor actualizado con éxito:', data);
-        // Aquí puedes cerrar el modal o actualizar la lista de proveedores si es necesario
-        document.getElementById('editModal').style.display = 'none';
         GetProveedores(); // Para refrescar la lista de proveedores
     })
     .catch(error => {

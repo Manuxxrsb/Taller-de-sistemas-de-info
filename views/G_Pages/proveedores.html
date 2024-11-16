@@ -16,49 +16,53 @@
         </ul>
     </nav>
     
-    <h1 class="title-home">Proveedores</h1>
+    <main style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <h1 class="title-home">Proveedores</h1>
 
-    <table>
-    <thead>
-        <tr>
-            <th>ID Proveedor</th>
-            <th>RUT</th>
-            <th>Nombre</th>
-            <th>Telefono</th>
-            <th>Correo</th>
-            <th>Dirección</th>
-            <th>Funciones</th>
-        </tr>
-    </thead>
-    <tbody class="Item-Proveedor"></tbody>
-    </table>
-
-    <!--   MODAL DE EDICION -->
-    <div id="editModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <h2>Editar Proveedor </h2>
-            <form id="editForm">
-
-                <input type="hidden" id="editId">
-
-                <label for="editRut">RUT:</label>
-                <input type="text" id="editRut">
-
-                <label for="editNombre">Nombre:</label>
-                <input type="text" id="editNombre">
-
-                <label for="editTelefono">Telefono</label>
-                <input type="text" id="editTelefono">
-
-                <label for="editCorreo">Correo</label>
-                <input type="text" id="editCorreo">
-
-                <label for="editDireccion">Dirección:</label>
-                <input type="text" id="editDireccion">
-
-                <button type="button"   onclick="Actualizar()">Actualizar</button>
-            </form>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Proveedor</th>
+                        <th>RUT</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Funciones</th>
+                    </tr>
+                </thead>
+                <tbody class="Item-Proveedor"></tbody>
+            </table>
         </div>
+
+       
+    </main>
+
+    <div class="edit-section" style="display: none;">
+        <h2>Editar Proveedor</h2>
+        <form id="editForm">
+
+            <input type="hidden" id="editId">
+
+            <label for="editRut">RUT:</label>
+            <input type="text" id="editRut">
+
+            <label for="editNombre">Nombre:</label>
+            <input type="text" id="editNombre">
+
+            <label for="editTelefono">Telefono</label>
+            <input type="text" id="editTelefono">
+
+            <label for="editCorreo">Correo</label>
+            <input type="text" id="editCorreo">
+
+            <label for="editDireccion">Dirección:</label>
+            <input type="text" id="editDireccion">
+
+            <button type="button"   onclick="Actualizar()">Actualizar</button>
+        </form>
+    </div>
 
 </body>
 
