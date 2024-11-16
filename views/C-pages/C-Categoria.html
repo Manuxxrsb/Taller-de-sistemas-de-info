@@ -4,22 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/estilos.css">
+    <link rel="stylesheet" href="../styles/estilos.css">
     <title> Agregar Categoría y Medicamentos </title>
 </head>
 
 <body>
-    <h1>Agregar Categoría y Medicamentos</h1>
-    <form onsubmit="enviarFormulario(event)">
-        <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
-        <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
-        <h3>Medicamentos</h3>
-        <div id="medicamentos"></div>
-        <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
 
-        <button type="submit">Guardar</button>
-    </form>
-
+    <nav class="navbar">
+        <div class="logo">Farmacias La Estrella</div>
+        <ul class="nav-links">
+            <li class="nav-button"><a href="../index.html">Inicio</a></li>
+            <li class="nav-button"><a href="../login.html">Log out</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1>Agregar Categoría y Medicamentos</h1>
+        <form onsubmit="enviarFormulario(event)">
+            <input type="text" name="nombre_categoria" placeholder="Nombre de la Categoría" required>
+            <input type="text" name="descripcion_categoria" placeholder="Descripción" required>
+            <h3>Medicamentos</h3>
+            <div id="medicamentos"></div>
+            <button type="button" onclick="agregarMedicamento()">Agregar Medicamento</button>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
     <script src="Script_C-Categoria.js"></script>
 </body>
 

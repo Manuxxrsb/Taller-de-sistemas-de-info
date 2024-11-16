@@ -14,7 +14,7 @@ function prueba() {
                         <td>${lista[i].nombre}</td>
                         <td>${lista[i].apellido}</td>
                         <td>
-                            <button onclick="eliminar(${lista[i].Id})">Eliminar</button>
+                            <button onclick="eliminar(${lista[i].ID})">Eliminar</button>
                         </td>
                         </tr>
                         `);
