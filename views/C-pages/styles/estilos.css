@@ -344,3 +344,158 @@ section#inicio {
 .container h1 {
     color: #333333; /* Asegurarse de que el color sea más oscuro */
 }
+
+/* ...existing code... */
+
+.categoria-form {
+    max-width: 800px !important;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.medicamentos-container {
+    border: 1px solid #06a77d;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.medicamentos-container > div {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.medicamentos-container button[onclick="eliminarMedicamento(this)"] {
+    background-color: #dc3545;
+    width: auto;
+    padding: 8px 15px;
+    margin-top: 10px;
+}
+
+.medicamentos-container button[onclick="eliminarMedicamento(this)"]:hover {
+    background-color: #c82333;
+}
+
+.categoria-form button[type="button"] {
+    background-color: #28a745;
+    margin-right: 10px;
+    width: auto;
+    padding: 10px 20px;
+}
+
+.categoria-form button[type="button"]:hover {
+    background-color: #218838;
+}
+
+.categoria-form input[type="text"],
+.categoria-form input[type="number"],
+.categoria-form input[type="date"],
+.categoria-form select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.categoria-form input:focus,
+.categoria-form select:focus {
+    border-color: #06a77d;
+    box-shadow: 0 0 8px rgba(6, 167, 125, 0.2);
+    transform: translateY(-1px);
+}
+
+.categoria-form label {
+    color: #052f5f;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    text-align: left;
+}
+
+.medicamentos-container input,
+.medicamentos-container select {
+    margin-bottom: 12px;
+    width: calc(50% - 10px);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.medicamentos-container > div {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+    .medicamentos-container input,
+    .medicamentos-container select {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+.select-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.select-container {
+    flex: 1;
+}
+
+.medicamento-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.btn-add {
+    background-color: #28a745;
+    margin-right: 10px;
+}
+
+.btn-save {
+    background-color: #06a77d;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    width: auto;
+    padding: 8px 15px;
+}
+
+.subtitle {
+    color: #052f5f;
+    margin: 20px 0;
+    text-align: left;
+}

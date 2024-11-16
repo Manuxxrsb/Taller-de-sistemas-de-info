@@ -15,40 +15,58 @@ function GetProveedores() {
         .catch(error => console.error(error));
 }
 
-function agregaopcionesProveedor(Proveedor) {
-    let p = document.getElementById('editProveedor');
+function agregaopcionesProveedor(Proveedor, selectElement) {
     let opciones = '';
     for (let i = 0; i < Proveedor.length; i++) {
         opciones += `<option value="${Proveedor[i].ID}">${Proveedor[i].nombre}</option>`;
     }
-    p.innerHTML = opciones;
+    selectElement.innerHTML = opciones;
 }
 
 //------- BOTONES ----------//
 
 function agregarMedicamento() {
     const contenedor = document.getElementById("medicamentos");
+    const medicamentoId = Date.now(); // Crear ID único
     const nuevoMedicamento = document.createElement("div");
+    nuevoMedicamento.className = "medicamento-item";
     nuevoMedicamento.innerHTML = `
-        <input type="text" name="nombre" placeholder="Nombre del Medicamento" required>
-        <input type="text" name="marca" placeholder="Marca" required>
-        <input type="text" name="descripcion" placeholder="Descripción" required>
-        <input type="text" name="numerolote" placeholder="Número de Lote" required>
-        <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
-        <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
-        <input type="number" name="stock" placeholder="Stock" required>
-        <label for="editBioequivalente">Bioequivalente</label>
-        <select id="editBioequivalente">
-        <option value="true">Sí</option>
-        <option value="false">No</option>
-        </select>
-        <label for="editBioequivalente">Proveedor</label>
-        <select id="editProveedor"></select>
-        <input type="number" name="Precio" placeholder="Precio" required>
-        <button type="button" onclick="eliminarMedicamento(this)">Eliminar</button>
+        <div class="input-group">
+            <input type="text" name="nombre" placeholder="Nombre del Medicamento" required>
+            <input type="text" name="marca" placeholder="Marca" required>
+        </div>
+        <div class="input-group">
+            <input type="text" name="descripcion" placeholder="Descripción" required>
+            <input type="text" name="numerolote" placeholder="Número de Lote" required>
+        </div>
+        <div class="input-group">
+            <input type="date" name="fechafabric" placeholder="Fecha de Fabricación" required>
+            <input type="date" name="fechavence" placeholder="Fecha de Vencimiento" required>
+        </div>
+        <div class="input-group">
+            <input type="number" name="stock" placeholder="Stock" required>
+            <input type="number" name="Precio" placeholder="Precio" required>
+        </div>
+        <div class="select-group">
+            <div class="select-container">
+                <label for="editBioequivalente_${medicamentoId}">Bioequivalente</label>
+                <select id="editBioequivalente_${medicamentoId}">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="select-container">
+                <label for="editProveedor_${medicamentoId}">Proveedor</label>
+                <select id="editProveedor_${medicamentoId}"></select>
+            </div>
+        </div>
+        <button type="button" class="btn-delete" onclick="eliminarMedicamento(this)">Eliminar</button>
     `;
     contenedor.appendChild(nuevoMedicamento);
-    agregaopcionesProveedor(ProveedoresList);
+    
+    // Agregar opciones de proveedor al nuevo select
+    const proveedorSelect = nuevoMedicamento.querySelector(`#editProveedor_${medicamentoId}`);
+    agregaopcionesProveedor(ProveedoresList, proveedorSelect);
 }
 
 function eliminarMedicamento(boton) {
@@ -77,8 +95,8 @@ function enviarFormulario(event) {
         const fechafabric = medicamento.querySelector('input[name="fechafabric"]').value;
         const fechavence = medicamento.querySelector('input[name="fechavence"]').value;
         const stock = medicamento.querySelector('input[name="stock"]').value;
-        const bioequivalente = medicamento.querySelector('select[id="editBioequivalente"]').value;
-        const proveedorID = parseInt(medicamento.querySelector('select[id="editProveedor"]').value);
+        const bioequivalente = medicamento.querySelector('select[id^="editBioequivalente_"]').value;
+        const proveedorID = parseInt(medicamento.querySelector('select[id^="editProveedor_"]').value);
         const precio = medicamento.querySelector('input[name="Precio"]').value;
 
         categoria.medicamentos.push({ nombre, marca, descripcion, numerolote, fechafabric, fechavence, stock, bioequivalente, proveedorID, precio });
