@@ -27,12 +27,18 @@ function prueba() {
 //----------- BOTONES -------------------
 
 function eliminar(id) {
-    const url = `http://localhost:8080/usuario/${id}`
-    fetch(url, { method: 'DELETE' })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            prueba();
-        })
-        .catch(error => console.error(error));
+    if (confirm('¿Está seguro que desea eliminar este usuario?')) {
+        const url = `http://localhost:8080/usuario/${id}`
+        fetch(url, { method: 'DELETE' })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Usuario eliminado con éxito');
+                prueba();
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error al eliminar el usuario');
+            });
+    }
 }
