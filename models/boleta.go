@@ -4,8 +4,9 @@ import "gorm.io/gorm"
 
 type Boleta struct {
 	gorm.Model
-	Email       string `json:"email"`
-	Medicamento []Medicamento
+	IdUsuario     string `json:"id_usuario"`
+	IdMedicamento string `json:"id_medicamento"`
+	Cantidad      string `json:"cantidad"`
 }
 
 func (Boleta) TableName() string {

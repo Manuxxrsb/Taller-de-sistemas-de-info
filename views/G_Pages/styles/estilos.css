@@ -353,3 +353,45 @@ button:hover {
     display: block; /* Centra el botón */
 }
 
+/* Estilos para los detalles de la boleta */
+#medicamentos-info {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 2px solid #005377;
+}
+
+#medicamentos-info h3 {
+    color: #052f5f;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #005377;
+}
+
+.medicamento-detalle {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+
+.medicamento-detalle p {
+    margin: 8px 0;
+    color: #444;
+}
+
+.medicamento-detalle strong {
+    color: #052f5f;
+    margin-right: 10px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+

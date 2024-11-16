@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="styles/estilos.css">
+    <title>Pagina De Venta</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Farmacias La Estrella</div>
+        <ul class="nav-links">
+            <li class="nav-button"><a href="../index.html">Inicio</a></li>
+            <li class="nav-button"><a href="../login.html">Log out</a></li>
+        </ul>
+    </nav>
+    <div class="form-container">
+        <form id="ventaForm">
+            <div id="productosContainer">
+                <div class="producto">
+                    <label for="medicamento">Medicamento:</label>
+                    <select class="medicamento" name="medicamento"></select>
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" class="cantidad" name="cantidad" min="1" required>
+                </div>
+            </div>
+            <button type="button" onclick="AgregarProducto()">Agregar Producto</button>
+            <button type="button" onclick="Vender()">Vender</button>
+        </form>
+    </div>
+    <script src="Script_Venta.js"></script>
+</body>
+</html>

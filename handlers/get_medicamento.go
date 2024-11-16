@@ -10,7 +10,7 @@ import (
 
 func GetMedicamento(db *gorm.DB) gin.HandlerFunc {
 	return func(informacion *gin.Context) {
-		id := informacion.Param("Id")
+		id := informacion.Param("ID")
 		var medicamento models.Medicamento
 		if err := db.First(&medicamento, id).Error; err != nil {
 			informacion.JSON(http.StatusNotFound, gin.H{"error": "Medicamento no encontrada"})
