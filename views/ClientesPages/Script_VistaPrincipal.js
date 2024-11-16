@@ -54,7 +54,7 @@ function nombreUsuario(nombre, email) {
     boleta.email = email;
     let p = document.querySelector("div.saludo");
     if (p !== null) {
-        p.innerHTML = `<h1 class="title-home">Bienvenido, ${nombre}</h1>`;
+        p.innerHTML = `<h1 class="title-home" style="color: #052f5f;">Bienvenido, ${nombre}</h1>`;
     } else {
         console.error("Elemento 'div.saludo' no encontrado");
     }
