@@ -31,15 +31,19 @@
         <label for="fechavence">Fechavence:</label> <input type="date" id="fechavence" name="fechavence">
         <label for="stock">Stock:</label> <input type="number" id="stock" name="stock">
         <label for="Bioequivalente">Bioequivalente:</label>
-        <select id="Bioequivalente">
+        <select id="Bioequivalente" name="Bioequivalente">
             <option value="true">Sí</option>
             <option value="false">No</option>
         </select>
-        <label for="categoria">Categoria: <select id="categoria"></select></label>
+        <label for="categoria">Categoria: 
+            <select id="categoria" name="categoria"></select>
+        </label>
+        <label for="Precio">Precio:</label> <input type="number" step="0.01" id="Precio" name="Precio">
+        <label for="Proveedor">Proveedor:</label> 
+        <select id="Proveedor" name="ProveedorID"></select>
         <button type="submit">Enviar</button>
     </form>
 
-    <button onclick="agregarMedicamento()">Agregar Medicamento</button>
 
     <div class="agregar-medicamento-container" style="display: none;">
         <h2>Agregar Medicamento</h2>

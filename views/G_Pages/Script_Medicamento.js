@@ -60,8 +60,8 @@ function displayMedicamentos(listaMedicamentos) {
                         <td>${listaMedicamentos[i].fechafabric}</td>
                         <td>${listaMedicamentos[i].fechavence}</td>
                         <td>${listaMedicamentos[i].stock}</td>
-                        <td>${listaMedicamentos[i].categoria_id}</td>
-                        <td>${listaMedicamentos[i].ProveedorID}</td>
+                        <td>${listaMedicamentos[i].categoria}</td>
+                        <td>${listaMedicamentos[i].proveedor_id}</td>
                         <td>${listaMedicamentos[i].bioequivalente}</td> 
                         <td>${listaMedicamentos[i].precio}</td>	
                         <td>
@@ -102,9 +102,9 @@ function filterMedicamentos() {
 function VerInformacion(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
     const medicamento = medicamentosList.find(m => m.ID === id);
     if (medicamento) {
-        // Encontrar el nombre de la categoría
+        // Encontrar el objeto de la categoría
         const categoria = CategoriasList.find(c => c.ID === medicamento.categoria_id);
-        // Encontrar el nombre del proveedor
+        // Encontrar el objeto del proveedor
         const proveedor = Listadeproveedores.find(p => p.ID === medicamento.ProveedorID);
 
         // Actualizar el contenido del modal
@@ -116,8 +116,8 @@ function VerInformacion(id) { //hacer que en vez de eliminar se pitee el stock p
         document.getElementById('infoFechafabric').textContent = medicamento.fechafabric;
         document.getElementById('infoFechavence').textContent = medicamento.fechavence;
         document.getElementById('infoStock').textContent = medicamento.stock;
-        document.getElementById('infoCategoria').textContent = categoria ? categoria.nombre : medicamento.categoria_id;
-        document.getElementById('infoProveedor').textContent = proveedor ? proveedor.nombre : medicamento.ProveedorID;
+        document.getElementById('infoCategoria').textContent = categoria ? categoria.nombre : medicamento.categoria;
+        document.getElementById('infoProveedor').textContent = proveedor ? proveedor.nombre : medicamento.proveedor_id;
         document.getElementById('infoBioequivalente').textContent = medicamento.bioequivalente ? 'Sí' : 'No';
         document.getElementById('infoPrecio').textContent = `$${medicamento.precio}`;
 
@@ -144,8 +144,8 @@ function editarMedicamento(id) {
         document.getElementById('editFechavence').value = medicamento.fechavence;
         document.getElementById('editStock').value = medicamento.stock;
         document.getElementById('editPrecio').value = medicamento.precio;
-        document.getElementById('editCategoria').value = medicamento.categoria_id; // Asegúrate de que esto funcione
-        document.getElementById('editProveedor').value = medicamento.ProveedorID;
+        document.getElementById('editCategoria').value = medicamento.categoria; // Asegúrate de que esto funcione
+        document.getElementById('editProveedor').value = medicamento.proveedor_id;
         document.getElementById('editModal').style.display = 'block';
     }
 }

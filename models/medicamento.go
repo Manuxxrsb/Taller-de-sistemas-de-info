@@ -13,8 +13,8 @@ type Medicamento struct {
 	Bioequivalente string `json:"bioequivalente"`
 	Precio         string `json:"precio"`
 	Stock          string `json:"stock"`
-	CategoriaID    int `json:"categoria_id"`
-	ProveedorID    int `json:"ProveedorID"`
+	CategoriaID    int    `json:"categoria"`
+	ProveedorID    int    `json:"proveedor_id"`
 }
 
 func (Medicamento) TableName() string {
