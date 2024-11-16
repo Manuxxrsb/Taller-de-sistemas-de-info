@@ -1,47 +1,83 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/views/styles/estilos.css">
-    <title>Index</title>
+    <title>Prueba</title>
+    <link rel="stylesheet" href="styles/estilos.css">
 </head>
 
-<header>
-    <h1 class="title-home-index">Farmacias La estrella</h1>
-    <button class="logout"><a href="index.html">Home</a></button>
-    <button onclick="eliminarCookies()" class="logout"> <a href="">Cerrar Sesión</a></button>
-</header>
-
 <body>
+    <nav class="navbar">
+        <div class="logo">Farmacias La Estrella</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="login.html">Log out</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio">
+        <h1>Bienvenido a MiSitio</h1>
+        <p>Descubre todo lo que podemos ofrecerte</p>
+    </section>
+
+    <section id="servicios">
+        <div class="container">
+            <h2>Creacion de:</h2>
+            <div class="servicios-grid">
+                <div class="servicio">
+                    <h3>Categorias</h3>
+                    <p>Funcion que permite crear categoria y sus medicamentos</p>
+                    <button><a href="C-pages/C-Categoria.html">Crear categoria</a></button>
+                </div>
+                <div class="servicio">
+                    <h3>Usuarios</h3>
+                    <p>Funcion que permite crear usuarios para la identificacion de estos</p>
+                    <button><a href="C-pages/C-Usuario.html">Crear Usuario</a></button>
+
+                </div>
+                <div class="servicio">
+                    <h3>Proveedor</h3>
+                    <p>Funcion que permite crear Proveedores para la trasabilidad de productos</p>
+                    <button><a href="C-pages/C-Proveedor.html">Crear Proveedor</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <div class="container">
+            <h2>Vista de:</h2>
+            <div class="servicios-grid">
+                <div class="servicio">
+                    <h3>Categorias</h3>
+                    <p>Funcion que permite ver la informacion de las categorias y sus medicamentos</p>
+                    <button> <a href="G_Pages/categorias.html"> Ver categoria </a> </button>
+                </div>
+                <div class="servicio">
+                    <h3>Usuarios</h3>
+                    <p>Funcion que permite ver la informacion de los usuarios para la identificacion de estos</p>
+                    <button> <a href="G_Pages/usuarios.html"> Ver Usuario </a> </button>
+                </div>
+                <div class="servicio">
+                    <h3>Proveedor</h3>
+                    <p>Funcion que permite ver la informacion de los proveedores para la trasabilidad de productos</p>
+                    <button> <a href="G_Pages/proveedores.html">Ver Proveedor</a> </button>
+                </div>
+                <div class="servicio">
+                    <h3>Medicamentos</h3>
+                    <p>Funcion que permite ver la informacion de los Medicamentoses para la trasabilidad de productos</p>
+                    <button> <a href="G_Pages/medicamentos.html">Ver Medicamentos</a> </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-
-    <div class="funcionalidades">
-        <h1 class="title-home">Funcionalidades</h1>
-        <nav class="navbar">
-            <ul class="func">
-                <li class="func-li"> <a href="G_Pages/usuarios.html">Mostrar Usuarios</a></li>
-                <li class="func-li"> <a href="G_Pages/categorias.html">Mostrar Categorias</a></li>
-                <li class="func-li"> <a href="G_Pages/medicamentos.html">Mostrar Medicamentos</a></li>
-                <li class="func-li"> <a href="G_Pages/proveedores.html">Mostrar Proveedores</a> </li>
-            </ul>
-            <ul class="func">
-                <li class="func-li"> <a href="C-pages/C-Categoria.html">Crear Categoria</a></li>
-                <li class="func-li"> <a href="C-pages/C-Proveedor.html"> Crear Proveedor</a></li>
-                <!--<li class="func-li"> Crear Medicamento </li>-->
-                <li class="func-li"> <a href="C-pages/C-Usuario.html"> Crear usuario </a></li>
-            </ul>
-        </nav>
-    </div>
-
+    <footer>
+        <p>&copy; 2024 Farmacias la estrella.</p>
+    </footer>
 </body>
-<footer class="links">
-    <ul class="func">
-        <li class="func-li"> <a href="ClientesPages/Ubicacion.html">Ubicacion</a></li>
-        <li class="func-li">Contactanos</li>
-        <li class="func-li">Redes Sociales</li>
-    </ul>
-</footer>
 
 </html>

@@ -8,6 +8,15 @@
 </head>
 
 <body>
+
+    <nav class="navbar">
+        <div class="logo">Farmacias La Estrella</div>
+        <ul class="nav-links">
+            <li class="nav-button"><a href="../index.html">Inicio</a></li>
+            <li class="nav-button"><a href="../login.html">Log out</a></li>
+        </ul>
+    </nav>
+    
     <h1 class="title-home">Medicamentos</h1>
 
     <!-- Campo de búsqueda -->
@@ -35,9 +44,31 @@
     </table>
     <!------------------------------------------------------------------------------>
 
+    <!-- Nuevo modal para ver información -->
+    <div id="infoModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2 class="title-home">Información del Medicamento</h2>
+            <div id="infoContent">
+                <p><strong>ID:</strong> <span id="infoId"></span></p>
+                <p><strong>Nombre:</strong> <span id="infoNombre"></span></p>
+                <p><strong>Marca:</strong> <span id="infoMarca"></span></p>
+                <p><strong>Descripción:</strong> <span id="infoDescripcion"></span></p>
+                <p><strong>Número de Lote:</strong> <span id="infoNumerolote"></span></p>
+                <p><strong>Fecha de Fabricación:</strong> <span id="infoFechafabric"></span></p>
+                <p><strong>Fecha de Vencimiento:</strong> <span id="infoFechavence"></span></p>
+                <p><strong>Stock:</strong> <span id="infoStock"></span></p>
+                <p><strong>Categoría:</strong> <span id="infoCategoria"></span></p>
+                <p><strong>Proveedor:</strong> <span id="infoProveedor"></span></p>
+                <p><strong>Bioequivalente:</strong> <span id="infoBioequivalente"></span></p>
+                <p><strong>Precio:</strong> <span id="infoPrecio"></span></p>
+            </div>
+            <button onclick="cerrarModalInfo()">Cerrar</button>
+        </div>
+    </div>
+
     <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
-            <h2>Editar Medicamento</h2>
+            <h2 class="title-home">Editar Medicamento</h2>
             <form id="editForm">
 
                 <input type="hidden" id="editId">

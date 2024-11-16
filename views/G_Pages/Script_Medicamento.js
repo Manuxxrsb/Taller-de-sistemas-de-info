@@ -65,7 +65,7 @@ function displayMedicamentos(listaMedicamentos) {
                         <td>${listaMedicamentos[i].bioequivalente}</td> 
                         <td>${listaMedicamentos[i].precio}</td>	
                         <td>
-                            <button onclick="eliminarMedicamento(${listaMedicamentos[i].ID})">Eliminar</button>
+                            <button onclick="VerInformacion(${listaMedicamentos[i].ID})">Ver</button>
                             <button onclick="editarMedicamento(${listaMedicamentos[i].ID})">Editar</button>
                         </td>
                 </tr>`;
@@ -99,19 +99,35 @@ function filterMedicamentos() {
     displayMedicamentos(filteredMedicamentos); // Mostrar los medicamentos filtrados
 }
 //---------- BOTONES -----
-function eliminarMedicamento(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
-    fetch(`http://localhost:8080/medicamentos/${id}`, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('Medicamento eliminado con éxito.');
-                GetInformacion(); // Volver a cargar la lista de medicamentos
-            } else {
-                alert('Error al eliminar el medicamento.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+function VerInformacion(id) { //hacer que en vez de eliminar se pitee el stock pero mantenga la informacion
+    const medicamento = medicamentosList.find(m => m.ID === id);
+    if (medicamento) {
+        // Encontrar el nombre de la categoría
+        const categoria = CategoriasList.find(c => c.ID === medicamento.categoria_id);
+        // Encontrar el nombre del proveedor
+        const proveedor = Listadeproveedores.find(p => p.ID === medicamento.ProveedorID);
+
+        // Actualizar el contenido del modal
+        document.getElementById('infoId').textContent = medicamento.ID;
+        document.getElementById('infoNombre').textContent = medicamento.nombre;
+        document.getElementById('infoMarca').textContent = medicamento.marca;
+        document.getElementById('infoDescripcion').textContent = medicamento.descripcion;
+        document.getElementById('infoNumerolote').textContent = medicamento.numerolote;
+        document.getElementById('infoFechafabric').textContent = medicamento.fechafabric;
+        document.getElementById('infoFechavence').textContent = medicamento.fechavence;
+        document.getElementById('infoStock').textContent = medicamento.stock;
+        document.getElementById('infoCategoria').textContent = categoria ? categoria.nombre : medicamento.categoria_id;
+        document.getElementById('infoProveedor').textContent = proveedor ? proveedor.nombre : medicamento.ProveedorID;
+        document.getElementById('infoBioequivalente').textContent = medicamento.bioequivalente ? 'Sí' : 'No';
+        document.getElementById('infoPrecio').textContent = `$${medicamento.precio}`;
+
+        // Mostrar el modal
+        document.getElementById('infoModal').style.display = 'block';
+    }
+}
+
+function cerrarModalInfo() {
+    document.getElementById('infoModal').style.display = 'none';
 }
 
 //FUNCION QUE ASIGNA LOS VALORES DE UN MEDICAMENTO A LOS CAMPOS DEL FORMULARIO DE EDICION
