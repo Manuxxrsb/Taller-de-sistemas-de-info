@@ -77,9 +77,11 @@ form.addEventListener('submit', (event) => {
         .then(response => response.json())
         .then(data => {
             console.log('Respuesta del servidor:', data);
+            alert('Medicamento registrado correctamente');
         })
         .catch(error => {
             console.error('Error:', error);
+            alert('Ocurrió un error al registrar el medicamento');
         });
 });
 
